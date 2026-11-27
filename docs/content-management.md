@@ -48,6 +48,10 @@ control. Anyone can read committed JSON and files under public/media, even if th
 site does not list them. Never commit confidential material, credentials, personal
 data or unpublished client assets. Store sensitive editorial drafts outside this repo.
 
+The six original service slugs and the Genyx case study with at least one image
+per locale are smoke-test baselines; retain them or update the tests deliberately.
+Additional approved entries do not require changing the catalog components.
+
 Publishing changes requires a new build and release. An authenticated external CMS
 can replace the existing repository adapters in the future without rewriting the
 presentation components. No runtime editing, media uploads, scheduling or live

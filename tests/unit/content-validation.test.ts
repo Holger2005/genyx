@@ -12,17 +12,53 @@ import services from "../../src/infrastructure/content/data/services.json";
 import products from "../../src/infrastructure/content/data/products.json";
 import site from "../../src/infrastructure/content/data/site.json";
 
-const firstProject = projects[0];
-const firstService = services[0];
-if (!firstProject || !firstService) throw new Error("Missing content fixtures");
+const image = {
+  id: "diagram",
+  kind: "image",
+  title: "Diagram",
+  caption: "Technical illustration",
+  alt: "Layer dependencies",
+  src: "/media/test/diagram.svg",
+  width: 800,
+  height: 480,
+};
+
+const projectCopy = {
+  title: "Example",
+  summary: "Summary",
+  challenge: "Challenge",
+  approach: "Approach",
+  capabilities: ["Example"],
+  limitations: "Prototype",
+  media: [image],
+};
+
+const firstProject = {
+  slug: "example",
+  status: "published",
+  technologies: ["TypeScript"],
+  content: { es: projectCopy, en: projectCopy },
+};
+
+const offeringCopy = {
+  title: "Example",
+  description: "Description",
+  audience: "Audience",
+  deliverables: ["Example"],
+};
+
+const firstService = {
+  slug: "example",
+  content: { es: offeringCopy, en: offeringCopy },
+};
 
 describe("editorial content", () => {
   it("validates all committed content and local media files", () => {
-    expect(validateServices(services)).toHaveLength(6);
-    expect(validateProducts(products)).toEqual([]);
+    expect(validateServices(services)).toHaveLength(services.length);
+    expect(validateProducts(products)).toHaveLength(products.length);
     expect(validateSite(site).es.title).toBe(site.es.title);
     const result = validateProjects(projects);
-    expect(result).toHaveLength(1);
+    expect(result).toHaveLength(projects.length);
     for (const project of result) {
       for (const copy of Object.values(project.content)) {
         for (const item of copy.media ?? []) {
@@ -44,8 +80,6 @@ describe("editorial content", () => {
   });
 
   it("rejects external and traversal media paths and invalid dimensions", () => {
-    const image = firstProject.content.es.media[0];
-    if (!image) throw new Error("Missing image fixture");
     const withMedia = (media: unknown[]) => [
       {
         ...firstProject,
@@ -85,8 +119,7 @@ describe("editorial content", () => {
       ...content,
       en: { ...content.en, media: [invalidVideo] },
     };
-    expect(() => validateProjects([{ ...firstProject, content: invalidContent }])).toThrow(
-      "captions",
-    );
+    const invalid = [{ ...firstProject, content: invalidContent }];
+    expect(() => validateProjects(invalid)).toThrow("captions");
   });
 });

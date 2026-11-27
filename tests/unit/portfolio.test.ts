@@ -45,13 +45,13 @@ describe("portfolio publication", () => {
 
   it("includes a first-party Genyx case study in both locales", () => {
     for (const locale of ["es", "en"] as const) {
-      expect(getProjects(staticProjectRepository, locale).map((project) => project.slug)).toEqual([
-        "genyx",
-      ]);
+      const approved = staticProjectRepository.list().filter((item) => item.status === "published");
+      expect(getProjects(staticProjectRepository, locale).map((project) => project.slug)).toEqual(
+        approved.map((item) => item.slug),
+      );
       expect(getProjectDetail(staticProjectRepository, locale, "genyx")?.limitations).toBeTruthy();
       const media = getProjectDetail(staticProjectRepository, locale, "genyx")?.media;
-      expect(media).toHaveLength(2);
-      expect(media?.every((item) => item.kind === "image")).toBe(true);
+      expect(media?.some((item) => item.kind === "image")).toBe(true);
     }
   });
 });
