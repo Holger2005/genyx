@@ -117,6 +117,9 @@ export function FoundationScreen({
           <p className="eyebrow">05 / CONTACT</p>
           <h2 id="contact-title">{content.contactTitle}</h2>
           <p className="description">{content.contactDescription}</p>
+          <Link className="action action-secondary" href={`/${locale}/inquiry`}>
+            {locale === "es" ? "Preparar proyecto" : "Prepare project"}
+          </Link>
         </section>
       </main>
       <footer className="footer">
