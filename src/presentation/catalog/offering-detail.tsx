@@ -15,7 +15,9 @@ export function OfferingDetail({
   const es = locale === "es";
   return (
     <PortfolioShell locale={locale} path={`/${section}/${item.slug}`}>
-      <Link href={`/${locale}/${section}`}>{es ? "← Volver al catálogo" : "← Back to catalog"}</Link>
+      <Link href={`/${locale}/${section}`}>
+        {es ? "← Volver al catálogo" : "← Back to catalog"}
+      </Link>
       <p className="eyebrow">GENYX / SOLUTIONS</p>
       <h1>{item.title}</h1>
       <p className="description">{item.description}</p>
