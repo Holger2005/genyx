@@ -59,7 +59,7 @@ export function FoundationScreen({
               </a>
             </div>
           </div>
-          <SculpturePreview />
+          <SculpturePreview locale={locale} />
         </section>
         <section id="services" className="section" tabIndex={-1} aria-labelledby="services-title">
           <p className="eyebrow">01 / EXPERTISE</p>

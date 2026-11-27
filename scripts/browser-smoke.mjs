@@ -339,7 +339,39 @@ try {
       await writeFile(join(folder, `genyx-gallery-${locale}.png`), gallery.data, "base64");
     }
   }
-  console.log("Browser smoke checks passed (Chromium, reduced motion)");
+  await command("Emulation.setDeviceMetricsOverride", {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 1,
+    mobile: true,
+  });
+  await command("Emulation.setTouchEmulationEnabled", { enabled: true });
+  await command("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
+  });
+  await command("Page.navigate", { url: `${origin}/es` });
+  await waitFor(
+    () => evaluate('document.readyState === "complete" && location.pathname === "/es"'),
+    "mobile homepage",
+  );
+  await waitFor(
+    () => evaluate('document.querySelector(".sculpture-activation").offsetWidth > 0'),
+    "mobile 3D control visible",
+  );
+  const mobileReady = await evaluate("!!document.querySelector('.sculpture-canvas[data-ready=true]')");
+  assert.equal(mobileReady, false);
+  const activation = 'document.querySelector(".sculpture-activation")';
+  await waitFor(async () => {
+    if (await evaluate(`${activation}.getAttribute("aria-pressed") === "true"`)) return true;
+    await evaluate(`${activation}.click()`);
+    return false;
+  }, "mobile 3D opt-in");
+  await evaluate(`${activation}.click()`);
+  await waitFor(
+    () => evaluate(`${activation}.getAttribute("aria-pressed") === "false"`),
+    "mobile 3D opt-out",
+  );
+  console.log("Browser smoke checks passed (Chromium, reduced motion and mobile opt-in)");
 } finally {
   socket?.close();
   for (const { child } of processes.reverse()) child.kill();

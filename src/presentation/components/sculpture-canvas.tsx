@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { Locale } from "../../domain/locale";
 import { normalizedPointer } from "../graphics/ambient-motion";
 import { createSculptureRenderer } from "../graphics/sculpture-renderer";
 
-export function SculptureCanvas() {
+export function SculptureCanvas({ locale }: { locale: Locale }) {
+  const [enabled, setEnabled] = useState(false);
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -16,6 +18,8 @@ export function SculptureCanvas() {
     }
 
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktop = window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)");
+    const permitted = () => enabled || desktop.matches;
     let renderer: ReturnType<typeof createSculptureRenderer> = null;
     let frame = 0;
     let visible = false;
@@ -30,6 +34,7 @@ export function SculptureCanvas() {
     function render() {
       frame = 0;
       if (!canvas || !host || !visible || motion.matches || document.hidden || unavailable) return;
+      if (!permitted()) return;
       renderer ??= createSculptureRenderer(canvas);
       if (!renderer) {
         unavailable = true;
@@ -43,6 +48,7 @@ export function SculptureCanvas() {
     }
 
     function schedule() {
+      if (!permitted()) return;
       if (!frame && visible && !motion.matches && !document.hidden && !unavailable) {
         frame = window.requestAnimationFrame(render);
       }
@@ -63,7 +69,7 @@ export function SculptureCanvas() {
     }
 
     function preference() {
-      if (motion.matches) hide();
+      if (motion.matches || !permitted()) hide();
       else schedule();
     }
 
@@ -91,6 +97,7 @@ export function SculptureCanvas() {
     window.addEventListener("scroll", schedule, { passive: true });
     document.addEventListener("visibilitychange", schedule);
     motion.addEventListener("change", preference);
+    desktop.addEventListener("change", preference);
     canvas.addEventListener("webglcontextlost", lost);
     canvas.addEventListener("webglcontextrestored", restored);
 
@@ -103,12 +110,25 @@ export function SculptureCanvas() {
       window.removeEventListener("scroll", schedule);
       document.removeEventListener("visibilitychange", schedule);
       motion.removeEventListener("change", preference);
+      desktop.removeEventListener("change", preference);
       canvas.removeEventListener("webglcontextlost", lost);
       canvas.removeEventListener("webglcontextrestored", restored);
       renderer?.dispose();
       hide();
     };
-  }, []);
+  }, [enabled]);
 
-  return <canvas ref={ref} className="sculpture-canvas" aria-hidden="true" />;
+  return (
+    <>
+      <canvas ref={ref} className="sculpture-canvas" aria-hidden="true" />
+      <button
+        type="button"
+        className="sculpture-activation"
+        aria-pressed={enabled}
+        onClick={() => setEnabled((value) => !value)}
+      >
+        {locale === "es" ? "Vista 3D" : "3D view"}
+      </button>
+    </>
+  );
 }
