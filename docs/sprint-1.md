@@ -48,6 +48,23 @@ the materials remain stylized rather than physically based.
 The background is CSS-based and the light model remains stylized. GPU performance and
 visual quality require browser and real-device verification.
 
+## Iteration 1.5
+
+- Production-server HTTP checks: redirects, unsupported locales, locale HTML and security headers.
+- Chromium smoke checks through the native Node.js WebSocket and DevTools protocol.
+- Responsive overflow checks at 320, 768, 1440 and 3840 CSS pixels, in both languages.
+- Keyboard menu opening, Escape dismissal, focus restoration and reduced-motion SVG fallback.
+- Initial decoded JavaScript budget of 1 MiB and navigation timing logged for each locale.
+- Run browser checks on Node.js 24 in the existing CI matrix after the production build.
+
+Run `npm run build` and then `npm run test:browser` with Node.js 24 and Chrome installed.
+Set `CHROME_PATH` to the executable if it is not available as `google-chrome`.
+The test runs a local server and a disposable headless browser profile. It uses no new npm packages.
+
+These are smoke tests, not Lighthouse or WCAG conformance audits. The navigation duration
+is not LCP or INP. Field Core Web Vitals, real GPU behavior, cross-browser accessibility,
+full CSP and HTTPS/HSTS verification remain open. The 1 MiB budget is a provisional ceiling.
+
 ## Manual verification
 
 - Open `/es` and `/en` and check all six service descriptions.
