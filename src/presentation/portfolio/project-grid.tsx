@@ -27,7 +27,11 @@ export function ProjectGrid({
                 <li key={technology}>{technology}</li>
               ))}
             </ul>
-            <Link className="action action-secondary" href={`/${locale}/projects/${project.slug}`}>
+            <Link
+              prefetch={false}
+              className="action action-secondary"
+              href={`/${locale}/projects/${project.slug}`}
+            >
               {locale === "es" ? "Ver caso de estudio" : "View case study"}
               <span aria-hidden="true">↗</span>
             </Link>
