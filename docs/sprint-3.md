@@ -23,6 +23,14 @@ Mobile Lighthouse checks now include inquiry and consultation routes in both
 languages, with unchanged release budgets. The agenda is illustrative and can
 be revised before commercial launch.
 
+## Iteration 3.3 — Google Calendar booking link
+
+A server-side configuration adapter accepts only recognized HTTPS Google appointment
+booking paths. The consultation page renders a booking link when configured, or
+retains the honest unavailable state otherwise. The reference time zone is
+America/Guayaquil. No availability is fabricated, and no booking data is sent from
+Genyx. See [Google Calendar setup](google-calendar.md) for owner verification.
+
 ## Next gates
 
 - Confirm CI, CodeQL and the release 0.3.0 quality gates before integration.
