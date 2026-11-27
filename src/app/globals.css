@@ -883,3 +883,14 @@ h2 {
 .consultation-agenda li span {
   color: var(--muted);
 }
+
+.contact-channel {
+  display: grid;
+  justify-items: start;
+  gap: 0.5rem;
+}
+
+.contact-channel-note {
+  color: var(--muted);
+  font-size: 0.875rem;
+}

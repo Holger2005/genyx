@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getServices } from "../../../application/catalog/catalog";
+import { getWhatsAppNumber } from "../../../config/whatsapp";
 import { isLocale } from "../../../domain/locale";
 import { staticCatalog } from "../../../infrastructure/catalog/static-catalog";
 import { InquiryForm } from "../../../presentation/inquiry/inquiry-form";
+import { WhatsAppAction } from "../../../presentation/contact/whatsapp-action";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -36,6 +38,10 @@ export default async function InquiryPage({ params }: { params: Promise<{ locale
       <Link className="action action-secondary" href={`/${locale}/consultation`}>
         {locale === "es" ? "Conocer la consultoría inicial" : "Explore the initial consultation"}
       </Link>
+      <WhatsAppAction
+        locale={locale}
+        number={getWhatsAppNumber(process.env.GENYX_WHATSAPP_NUMBER)}
+      />
     </PortfolioShell>
   );
 }

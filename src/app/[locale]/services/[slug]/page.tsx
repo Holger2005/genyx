@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { findOffering, getServices } from "../../../../application/catalog/catalog";
+import { getWhatsAppNumber } from "../../../../config/whatsapp";
 import { isLocale } from "../../../../domain/locale";
 import { staticCatalog } from "../../../../infrastructure/catalog/static-catalog";
 import { OfferingDetail } from "../../../../presentation/catalog/offering-detail";
@@ -32,5 +33,12 @@ export default async function DetailPage({
   if (!isLocale(locale)) notFound();
   const item = findOffering(getServices(staticCatalog, locale), slug);
   if (!item) notFound();
-  return <OfferingDetail locale={locale} item={item} section="services" />;
+  return (
+    <OfferingDetail
+      locale={locale}
+      item={item}
+      section="services"
+      whatsappNumber={getWhatsAppNumber(process.env.GENYX_WHATSAPP_NUMBER)}
+    />
+  );
 }
