@@ -44,7 +44,10 @@ test("blocks private credential references, but permits public contact configura
 
 test("preserves the separate local CRM module", () => {
   assert.deepEqual(
-    inspectPublicSource("src/infrastructure/crm/sqlite-lead-repository.ts", 'import "node:sqlite";'),
+    inspectPublicSource(
+      "src/infrastructure/crm/sqlite-lead-repository.ts",
+      'import "node:sqlite";',
+    ),
     [],
   );
 });

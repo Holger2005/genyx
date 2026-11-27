@@ -16,13 +16,13 @@ already-supported deployment mode.
 
 ## Hosting options reviewed on 2026-11-26
 
-| Option | Role | Decision |
-| --- | --- | --- |
-| Cloudflare Pages Free | Static public site | Preferred candidate for zero hosting fees within quotas |
-| Vercel Hobby | Personal noncommercial projects | Not approved for a commercial Genyx site |
-| Vercel Pro | Managed Next.js alternative | Requires explicit budget approval |
-| Supabase Free | Future private Postgres and Auth prototype | Candidate only; inactivity pausing and recovery limitations |
-| Local n8n and SQLite | Synthetic operator laboratory | Keep local, no public tunnel |
+| Option                | Role                                       | Decision                                                    |
+| --------------------- | ------------------------------------------ | ----------------------------------------------------------- |
+| Cloudflare Pages Free | Static public site                         | Preferred candidate for zero hosting fees within quotas     |
+| Vercel Hobby          | Personal noncommercial projects            | Not approved for a commercial Genyx site                    |
+| Vercel Pro            | Managed Next.js alternative                | Requires explicit budget approval                           |
+| Supabase Free         | Future private Postgres and Auth prototype | Candidate only; inactivity pausing and recovery limitations |
+| Local n8n and SQLite  | Synthetic operator laboratory              | Keep local, no public tunnel                                |
 
 Cloudflare documents free static asset traffic and 500 monthly Pages builds
 on the Free tier. Its terms and account-specific constraints must be accepted

@@ -19,7 +19,8 @@ const approvedPages = new Set([
 
 const privatePath = /^src\/(domain|application|infrastructure)\/crm\//;
 const sourceFile = /\.[cm]?[jt]sx?$/;
-const sensitiveConfig = /\b(?:GENYX_N8N_TEST_TOKEN|NEXT_PUBLIC_[A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE_KEY))\b/;
+const sensitiveConfig =
+  /\b(?:GENYX_N8N_TEST_TOKEN|NEXT_PUBLIC_[A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE_KEY))\b/;
 
 export function inspectPublicSource(path, content) {
   if (!sourceFile.test(path) || privatePath.test(path)) return [];
