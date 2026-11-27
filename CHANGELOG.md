@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased — Sprint 0 hardening
+## 0.2.0 — Sprint 1 visual prototype
+
+- Bilingual responsive corporate homepage, six service cards and native modal navigation.
+- Procedural WebGL sculpture, SVG fallback, scroll-linked deformation and ambient lighting.
+- Reduced-motion support and keyboard focus handling.
+- Production HTTP and Chromium smoke tests, responsive viewport checks and initial JS budget.
+- Release evidence and open production acceptance gates documented.
+
+## Sprint 0 hardening
 
 - Group compatible Vitest updates and defer selected major dependency migrations.
 - Pin workflow actions to previously tested commit SHAs and reduce credential exposure.
