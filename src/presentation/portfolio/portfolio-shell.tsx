@@ -22,9 +22,11 @@ export function PortfolioShell({
         <Link href={`/${locale}`}>
           <Brand />
         </Link>
-        <div className="header-actions">
+        <div className="header-actions catalog-nav">
           <Link href={`/${locale}/projects`}>{locale === "es" ? "Proyectos" : "Projects"}</Link>
-          <Link href={`/${other}/projects${path}`} lang={other}>
+          <Link href={`/${locale}/services`}>{locale === "es" ? "Servicios" : "Services"}</Link>
+          <Link href={`/${locale}/products`}>{locale === "es" ? "Productos" : "Products"}</Link>
+          <Link href={`/${other}${path}`} lang={other}>
             {locale === "es" ? "English" : "Español"}
           </Link>
         </div>

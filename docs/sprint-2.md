@@ -27,6 +27,19 @@ The diagrams are original technical illustrations, not screenshots. Captured bro
 images are for review and are not published automatically. No video file is available
 yet; the video renderer is prepared for approved MP4 and WebVTT caption files only.
 
+## Iteration 2.4
+
+- Bilingual service catalog and individual pages for all six specialties.
+- Shared domain model and catalog repository contract.
+- Proposed deliverables and intended audience for each service.
+- SaaS catalog exposes available products only; currently none are approved.
+- Empty catalog state, guarded detail routes and honest contact-status links.
+- Unit tests and production HTTP checks for service and product routes.
+
+No prices, fabricated products, payment flows or working inquiry forms are published.
+The contact integration remains a Sprint 3 task. Service descriptions are proposed
+commercial scope, not evidence of prior client work or guaranteed outcomes.
+
 ## Acceptance gates
 
 - Verify CI, browser smoke tests and CodeQL on the new pull request.

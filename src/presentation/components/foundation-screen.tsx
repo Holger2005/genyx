@@ -21,6 +21,7 @@ export function FoundationScreen({
     { href: "#home", label: content.home },
     { href: "#services", label: content.explore },
     { href: "#work", label: content.workTitle },
+    { href: "#products", label: locale === "es" ? "Productos" : "Products" },
     { href: "#about", label: content.aboutTitle },
     { href: "#contact", label: content.contact },
   ];
@@ -66,13 +67,20 @@ export function FoundationScreen({
           <p className="description">{content.servicesIntro}</p>
           <div className="service-grid">
             {content.services.map((service, index) => (
-              <article key={service.title} className="service-card">
+              <article key={service.slug} className="service-card">
                 <span className="eyebrow">{String(index + 1).padStart(2, "0")} / G</span>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
+                <Link href={`/${locale}/services/${service.slug}`}>
+                  {locale === "es" ? "Ver servicio" : "View service"}
+                  <span className="sr-only">: {service.title}</span>
+                </Link>
               </article>
             ))}
           </div>
+          <Link className="action action-secondary" href={`/${locale}/services`}>
+            {locale === "es" ? "Todos los servicios" : "All services"}
+          </Link>
         </section>
         <section
           id="work"
@@ -88,8 +96,15 @@ export function FoundationScreen({
             {locale === "es" ? "Ver portafolio" : "View portfolio"}
           </Link>
         </section>
+        <section id="products" className="section" tabIndex={-1}>
+          <p className="eyebrow">03 / PRODUCTS</p>
+          <h2>{locale === "es" ? "Productos Genyx" : "Genyx products"}</h2>
+          <Link className="action action-secondary" href={`/${locale}/products`}>
+            {locale === "es" ? "Consultar catálogo" : "Browse catalog"}
+          </Link>
+        </section>
         <section id="about" className="section" tabIndex={-1} aria-labelledby="about-title">
-          <p className="eyebrow">03 / GENYX</p>
+          <p className="eyebrow">04 / GENYX</p>
           <h2 id="about-title">{content.aboutTitle}</h2>
           <p className="description">{content.aboutDescription}</p>
         </section>
@@ -99,7 +114,7 @@ export function FoundationScreen({
           tabIndex={-1}
           aria-labelledby="contact-title"
         >
-          <p className="eyebrow">04 / CONTACT</p>
+          <p className="eyebrow">05 / CONTACT</p>
           <h2 id="contact-title">{content.contactTitle}</h2>
           <p className="description">{content.contactDescription}</p>
         </section>

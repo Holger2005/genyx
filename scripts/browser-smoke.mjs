@@ -164,6 +164,16 @@ try {
       ["projects", 200],
       ["projects/genyx", 200],
       ["projects/unpublished", 404],
+      ["services", 200],
+      ["services/web", 200],
+      ["services/mobile", 200],
+      ["services/enterprise", 200],
+      ["services/ai", 200],
+      ["services/automation", 200],
+      ["services/integrations", 200],
+      ["services/unknown", 404],
+      ["products", 200],
+      ["products/unavailable", 404],
     ]) {
       const path = `/${locale}/${suffix}`;
       const result = await request(path);

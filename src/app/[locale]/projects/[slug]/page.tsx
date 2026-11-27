@@ -28,7 +28,7 @@ export default async function ProjectPage({
   const es = locale === "es";
 
   return (
-    <PortfolioShell locale={locale} path={`/${project.slug}`}>
+    <PortfolioShell locale={locale} path={`/projects/${project.slug}`}>
       <Link href={`/${locale}/projects`}>{es ? "← Todos los proyectos" : "← All projects"}</Link>
       <p className="eyebrow">{es ? "CASO DE ESTUDIO / PROTOTIPO" : "CASE STUDY / PROTOTYPE"}</p>
       <h1>{project.title}</h1>

@@ -744,3 +744,26 @@ h2 {
   border-radius: var(--radius);
   padding: 1rem;
 }
+
+.catalog-nav {
+  flex-wrap: wrap;
+}
+
+.service-card h2 {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  overflow-wrap: anywhere;
+}
+
+.service-card a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+#services > .action,
+#products > .action {
+  justify-self: start;
+  max-width: 100%;
+}

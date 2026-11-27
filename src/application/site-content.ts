@@ -1,6 +1,7 @@
 import type { Locale } from "../domain/locale";
 
 export interface ServiceContent {
+  readonly slug: string;
   readonly title: string;
   readonly description: string;
 }
