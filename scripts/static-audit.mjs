@@ -72,4 +72,5 @@ export function auditStatic(root) {
     throw new Error("Preview must remain noindex");
   }
   console.log("GENYX static deployment artifact checks passed");
+  return found;
 }

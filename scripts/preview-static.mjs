@@ -1,10 +1,12 @@
 import { createServer } from "node:http";
-import { readFileSync, statSync } from "node:fs";
-import { resolve, sep } from "node:path";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import { auditStatic } from "./static-audit.mjs";
 
 const root = resolve("out");
-auditStatic(root);
+const files = auditStatic(root);
+files.delete("_headers");
+files.delete("_redirects");
 const types = {
   html: "text/html; charset=utf-8",
   txt: "text/plain; charset=utf-8",
@@ -45,17 +47,9 @@ createServer((request, response) => {
     response.writeHead(302, { Location: "/es" }).end();
     return;
   }
-  const candidate = resolve(root, "." + pathname);
-  const paths = [candidate, candidate + ".html"];
-  const file =
-    !pathname.includes("\\") &&
-    !pathname.split("/").some((part) => part.startsWith(".")) &&
-    !["/_headers", "/_redirects"].includes(pathname)
-      ? paths.find(
-          (path) => path.startsWith(root + sep) && statSync(path, { throwIfNoEntry: false })?.isFile(),
-        )
-      : undefined;
-  const selected = file ?? resolve(root, "404.html");
+  const relative = pathname.slice(1);
+  const file = [relative, relative + ".html"].find((path) => files.has(path));
+  const selected = resolve(root, file ?? "404.html");
   const extension = selected.split(".").at(-1);
   response.writeHead(file ? 200 : 404, {
     "Content-Type": types[extension] ?? "application/octet-stream",
