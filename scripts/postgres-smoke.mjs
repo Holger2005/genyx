@@ -19,26 +19,30 @@ function docker(args, options = {}) {
 }
 
 try {
-  docker([
-    "run",
-    "-d",
-    "--name",
-    name,
-    "--network",
-    "none",
-    "-e",
-    "POSTGRES_PASSWORD",
-    "-e",
-    "POSTGRES_DB=genyx_test",
-    "postgres:17",
-  ], { env });
+  docker(
+    [
+      "run",
+      "-d",
+      "--name",
+      name,
+      "--network",
+      "none",
+      "-e",
+      "POSTGRES_PASSWORD",
+      "-e",
+      "POSTGRES_DB=genyx_test",
+      "postgres:17",
+    ],
+    { env },
+  );
 
   let ready = false;
   for (let attempt = 0; attempt < 60; attempt += 1) {
     try {
-      docker(["exec", name, "psql", "-U", "postgres", "-d", "genyx_test", "-c", "select 1"], {
-        timeout: 5000,
-      });
+      docker(
+        ["exec", name, "pg_isready", "-h", "127.0.0.1", "-U", "postgres", "-d", "genyx_test"],
+        { timeout: 5000 },
+      );
       ready = true;
       break;
     } catch {
@@ -53,7 +57,21 @@ try {
     "tests/postgres/crm-security.sql",
   ]) {
     const output = docker(
-      ["exec", "-i", name, "psql", "-X", "-U", "postgres", "-d", "genyx_test", "-v", "ON_ERROR_STOP=1", "-f", "-"],
+      [
+        "exec",
+        "-i",
+        name,
+        "psql",
+        "-X",
+        "-U",
+        "postgres",
+        "-d",
+        "genyx_test",
+        "-v",
+        "ON_ERROR_STOP=1",
+        "-f",
+        "-",
+      ],
       { input: readFileSync(new URL("../" + path, import.meta.url), "utf8") },
     );
     console.log(output.trim());
