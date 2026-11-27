@@ -46,6 +46,9 @@ jobs:
       - name: Public deployment boundary tests
         run: npm run test:boundary
 
+      - name: Local authenticated dashboard checks
+        run: npm run test:admin
+
       - name: Local CRM CLI smoke check
         run: npm run test:crm
 

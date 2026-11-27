@@ -10,6 +10,9 @@ without any actual lead intake or public administration. Keep the local n8n
 and SQLite laboratory synthetic and offline from public traffic. A later
 authenticated backend will own real lead persistence and delivery.
 
+A separate local administrative dashboard is implemented in Sprint 4.2; it is not
+an approved production backend. See [admin setup](admin.md).
+
 The current Next.js server build remains the supported implementation.
 A static-export proof of concept is the next implementation gate, not an
 already-supported deployment mode.
