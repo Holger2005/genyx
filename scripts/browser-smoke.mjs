@@ -226,9 +226,23 @@ try {
         deviceScaleFactor: 1,
         mobile: false,
       });
+      await waitFor(() => evaluate(`innerWidth === ${width}`), "viewport resize");
+      const layout = await evaluate(`(async () => {
+        await document.fonts.ready;
+        await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+        const viewport = document.documentElement.clientWidth;
+        return {
+          viewport,
+          scrollWidth: document.documentElement.scrollWidth,
+          overflowing: [...document.querySelectorAll("main *, header *, footer *")]
+            .filter(element => element.getBoundingClientRect().right > viewport + 1)
+            .slice(0, 8)
+            .map(element => element.tagName + "." + (element.getAttribute("class") || ""))
+        };
+      })()`);
       assert.ok(
-        await evaluate("document.documentElement.scrollWidth <= innerWidth + 1"),
-        `Horizontal overflow at ${locale}/${width}px`,
+        layout.scrollWidth <= layout.viewport + 1,
+        `Horizontal overflow at ${locale}/${width}px: ${JSON.stringify(layout)}`,
       );
     }
 
