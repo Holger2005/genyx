@@ -55,7 +55,7 @@ jobs:
       - name: n8n CRM bridge contract checks
         run: npm run test:bridge
 
-      - name: PostgreSQL CRM authorization checks
+      - name: PostgreSQL CRM authorization and synthetic ingestion checks
         if: ${{ matrix.node-version == 24 }}
         run: npm run test:postgres
 
