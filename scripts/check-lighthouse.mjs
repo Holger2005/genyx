@@ -45,6 +45,11 @@ for (const locale of ["es", "en"]) {
     const tbt = report.audits["total-blocking-time"].numericValue;
     const scores = { performance, accessibility, bestPractices, seo, lcp, cls, tbt };
     console.log(key, JSON.stringify(scores));
+    if (performance < 0.95 || tbt > 200) {
+      const tasks = report.audits["long-tasks"]?.details?.items ?? [];
+      const breakdown = report.audits["mainthread-work-breakdown"]?.details?.items ?? [];
+      console.log(key, JSON.stringify({ tasks: tasks.slice(0, 10), breakdown }));
+    }
     threshold(`${key} performance`, performance, 0.95, "min");
     threshold(`${key} accessibility`, accessibility, 0.95, "min");
     threshold(`${key} LCP`, lcp, 2500, "max");
