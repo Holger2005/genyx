@@ -42,6 +42,7 @@ for locale in es en; do
   audit "$locale-products-mobile" "$locale/products"
   audit "$locale-inquiry-mobile" "$locale/inquiry"
   audit "$locale-consultation-mobile" "$locale/consultation"
+  audit "$locale-privacy-mobile" "$locale/privacy"
 done
 
 npm run test:lighthouse

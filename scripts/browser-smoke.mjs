@@ -185,6 +185,8 @@ try {
       ["inquiry", 200],
       ["consultation", 200],
       ["privacy", 200],
+      ["admin", 404],
+      ["crm", 404],
     ]) {
       const path = `/${locale}/${suffix}`;
       const result = await request(path);
@@ -201,6 +203,10 @@ try {
         }
       }
     }
+  }
+  for (const path of ["/api/leads", "/api/inquiry", "/api/crm", "/admin"]) {
+    const result = await request(path);
+    assert.equal(result.status, 404, `No public administrative or intake route: ${path}`);
   }
   console.log("HTTP, locale and security header checks passed");
 

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0 — Sprint 3 commercial integration laboratory (candidate)
+
+- Bilingual project preparation, consultation information and optional booking/contact links.
+- Synthetic n8n webhook, SQLite CRM CLI, validated local bridge and idempotent lead history.
+- Prototype privacy notice and documented commercial launch blockers.
+- Expanded browser, CLI, contract and Lighthouse release gates.
+- No public lead intake, real customer storage, public CRM administration or production deployment.
+
 ## 0.3.0 — Sprint 2 portfolio and catalog
 
 - Bilingual portfolio, first-party case study, technical gallery and live WebGL demonstration.
