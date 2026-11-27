@@ -35,6 +35,14 @@ can validate a live n8n response before exercising the database in a disposable
 container. CI uses an explicitly simulated response. See [integration setup](n8n-postgres.md).
 A hosted adapter and real commercial intake remain disabled.
 
+## 4.5 — Security and privacy readiness
+
+The tracked-file security gate and regression tests are included in quality checks.
+The public source guard rejects database credentials and private migration imports.
+See [security and privacy readiness](security-privacy.md) for the risk, retention,
+incident response and commercial release approval checklist.
+Production compliance and hosted security controls are not yet verified.
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.

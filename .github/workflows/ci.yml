@@ -43,6 +43,9 @@ jobs:
       - name: Quality checks
         run: npm run check
 
+      - name: Secret policy regression tests
+        run: npm run test:security
+
       - name: Public deployment boundary tests
         run: npm run test:boundary
 

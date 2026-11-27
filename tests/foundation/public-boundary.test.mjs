@@ -29,6 +29,7 @@ test("rejects direct, re-exported, aliased, and dynamic private imports", () => 
     'export * from "@/application/crm/lead-repository";',
     'const db = await import("node:sqlite");',
     'const sync = require("../../../scripts/crm-sync.mjs");',
+    'const migration = require("../../../supabase/migrations/example.sql");',
     "const module = await import(name);",
   ]) {
     assert.ok(inspectPublicSource(page, code).length > 0);
@@ -39,6 +40,8 @@ test("blocks private credential references, but permits public contact configura
   assert.ok(inspectPublicSource(page, "process.env.GENYX_N8N_TEST_TOKEN").length > 0);
   assert.ok(inspectPublicSource(page, "process.env.GENYX_ADMIN_TOKEN").length > 0);
   assert.ok(inspectPublicSource(page, "process.env.NEXT_PUBLIC_ADMIN_SECRET").length > 0);
+  assert.ok(inspectPublicSource(page, "process.env.DATABASE_URL").length > 0);
+  assert.ok(inspectPublicSource(page, "process.env.SUPABASE_SERVICE_ROLE_KEY").length > 0);
   assert.deepEqual(inspectPublicSource(page, "process.env.GENYX_GOOGLE_BOOKING_URL"), []);
   assert.deepEqual(inspectPublicSource(page, "process.env.GENYX_WHATSAPP_NUMBER"), []);
 });

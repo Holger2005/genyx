@@ -37,12 +37,14 @@ Remove-Item Env:GENYX_N8N_TEST_TOKEN
 
 ## Current boundaries
 
-- No network-exposed CRM or browser administrator interface.
-- Local OS account is the administrative boundary; no application-level login.
+- No public CRM or administrator interface. The private dashboard listens on loopback only.
+- Local OS account is the trust boundary; the dashboard has temporary token authentication.
 - SQLite is not encrypted. Never store actual customer data in this laboratory.
 - No public form submission, real lead processing, third-party tracking added by
   this phase, or automatic outbound messages.
 - The prototype privacy page is descriptive, not a final legal privacy policy.
+
+See [security and privacy readiness](security-privacy.md) for the current release checklist.
 
 ## Commercial release blockers
 
