@@ -40,8 +40,8 @@ export function OfferingDetail({
             ? "El alcance y las condiciones se acuerdan antes de iniciar. Contacto en preparación."
             : "Scope and terms are agreed before work begins. Contact options are in development."}
         </p>
-        <Link className="action action-secondary" href={`/${locale}#contact`}>
-          {es ? "Ver estado del contacto" : "View contact status"}
+        <Link className="action action-secondary" href={`/${locale}/inquiry`}>
+          {es ? "Preparar proyecto" : "Prepare project"}
         </Link>
       </section>
     </PortfolioShell>
