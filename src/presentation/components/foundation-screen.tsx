@@ -16,6 +16,7 @@ export function FoundationScreen({ locale, content }: { locale: Locale; content:
 
   return (
     <div className="shell">
+      <div className="scroll-progress" aria-hidden="true" />
       <a className="skip-link" href="#home">
         {content.skip}
       </a>
@@ -30,7 +31,7 @@ export function FoundationScreen({ locale, content }: { locale: Locale; content:
           <CinematicMenu menu={content.menu} close={content.close} links={links} />
         </div>
       </header>
-      <main id="home">
+      <main id="home" tabIndex={-1}>
         <section className="hero" aria-labelledby="hero-title">
           <div className="hero-copy">
             <p className="eyebrow">{content.eyebrow}</p>
@@ -47,7 +48,7 @@ export function FoundationScreen({ locale, content }: { locale: Locale; content:
           </div>
           <SculpturePreview />
         </section>
-        <section id="services" className="section" aria-labelledby="services-title">
+        <section id="services" className="section" tabIndex={-1} aria-labelledby="services-title">
           <p className="eyebrow">01 / EXPERTISE</p>
           <h2 id="services-title">{content.servicesTitle}</h2>
           <p className="description">{content.servicesIntro}</p>
@@ -61,17 +62,27 @@ export function FoundationScreen({ locale, content }: { locale: Locale; content:
             ))}
           </div>
         </section>
-        <section id="work" className="section feature-panel" aria-labelledby="work-title">
+        <section
+          id="work"
+          className="section feature-panel"
+          tabIndex={-1}
+          aria-labelledby="work-title"
+        >
           <p className="eyebrow">02 / SELECTED WORK</p>
           <h2 id="work-title">{content.workTitle}</h2>
           <p className="description">{content.workDescription}</p>
         </section>
-        <section id="about" className="section" aria-labelledby="about-title">
+        <section id="about" className="section" tabIndex={-1} aria-labelledby="about-title">
           <p className="eyebrow">03 / GENYX</p>
           <h2 id="about-title">{content.aboutTitle}</h2>
           <p className="description">{content.aboutDescription}</p>
         </section>
-        <section id="contact" className="section feature-panel" aria-labelledby="contact-title">
+        <section
+          id="contact"
+          className="section feature-panel"
+          tabIndex={-1}
+          aria-labelledby="contact-title"
+        >
           <p className="eyebrow">04 / CONTACT</p>
           <h2 id="contact-title">{content.contactTitle}</h2>
           <p className="description">{content.contactDescription}</p>

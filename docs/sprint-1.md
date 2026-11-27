@@ -22,6 +22,20 @@ selected for this prototype instead of Three.js to avoid introducing unverified 
 The shading is stylized, not physically accurate glass or titanium. Browser verification,
 performance measurements, final art direction and accessibility tests remain acceptance gates.
 
+## Iteration 1.3
+
+- CSS entry motion for the hero and staggered modal navigation.
+- Progressive scroll-linked section reveals and reading progress in supported browsers.
+- Scroll-driven circular-to-hexagonal ring deformation with eased, bounded parameters.
+- Refined metallic rim lighting and translucent blending.
+- Focusable anchor destinations and focus transfer when choosing a modal menu link.
+- Reduced-motion preference disables decorative motion; unsupported CSS falls back to static content.
+- Unit tests for deformation boundaries and invalid input.
+
+No new dependencies were added. Page entry motion is implemented, but a full cross-route
+exit/entry transition is not yet implemented. Shader normals are approximate during deformation;
+the materials remain stylized rather than physically based.
+
 ## Manual verification
 
 - Open `/es` and `/en` and check all six service descriptions.
@@ -31,4 +45,6 @@ performance measurements, final art direction and accessibility tests remain acc
 - Move the pointer and scroll; verify the sculpture reacts without a continuous render loop.
 - Disable hardware acceleration or simulate WebGL context loss and verify the SVG fallback.
 - Verify that unfinished commercial integrations do not claim to accept requests.
+- Verify scroll-linked reveals and progress in supported browsers and static fallback elsewhere.
+- Check geometry morphing and keyboard focus after selecting a modal link.
 - Record Lighthouse and real-device measurements before claiming performance targets.

@@ -38,3 +38,9 @@ export function renderSize(width: number, height: number, pixelRatio: number) {
     height: Math.max(1, Math.round(height * ratio)),
   };
 }
+
+export function morphAmount(scroll: number) {
+  if (!Number.isFinite(scroll)) return 0;
+  const progress = Math.max(0, Math.min(1, scroll / 0.8));
+  return progress * progress * (3 - 2 * progress);
+}
