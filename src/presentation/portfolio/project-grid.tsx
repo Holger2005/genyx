@@ -9,6 +9,7 @@ export function ProjectGrid({
   projects: readonly PublishedProject[];
   locale: Locale;
 }) {
+  const prototypeLabel = locale === "es" ? "PROTOTIPO PROPIO" : "FIRST-PARTY PROTOTYPE";
   return (
     <div className="project-grid">
       {projects.map((project) => (
@@ -18,7 +19,7 @@ export function ProjectGrid({
             <div className="project-symbol" />
           </div>
           <div className="project-copy">
-            <p className="eyebrow">{locale === "es" ? "PROTOTIPO PROPIO" : "FIRST-PARTY PROTOTYPE"}</p>
+            <p className="eyebrow">{prototypeLabel}</p>
             <h3>{project.title}</h3>
             <p>{project.summary}</p>
             <ul className="technology-list">
@@ -26,7 +27,10 @@ export function ProjectGrid({
                 <li key={technology}>{technology}</li>
               ))}
             </ul>
-            <Link className="action action-secondary" href={`/${locale}/projects/${project.slug}`}>
+            <Link
+              className="action action-secondary"
+              href={`/${locale}/projects/${project.slug}`}
+            >
               {locale === "es" ? "Ver caso de estudio" : "View case study"}
               <span aria-hidden="true">↗</span>
             </Link>
