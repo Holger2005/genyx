@@ -43,6 +43,9 @@ jobs:
       - name: Quality checks
         run: npm run check
 
+      - name: Public deployment boundary tests
+        run: npm run test:boundary
+
       - name: Local CRM CLI smoke check
         run: npm run test:crm
 
