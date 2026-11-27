@@ -167,7 +167,11 @@ try {
     ]) {
       const path = `/${locale}/${suffix}`;
       const result = await request(path);
-      assert.equal(result.status, expected, `Unexpected HTTP status for ${path}; run npm run build`);
+      assert.equal(
+        result.status,
+        expected,
+        `Unexpected HTTP status for ${path}; run npm run build`,
+      );
     }
   }
   console.log("HTTP, locale and security header checks passed");
