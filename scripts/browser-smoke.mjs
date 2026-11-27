@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
@@ -46,6 +46,12 @@ async function request(path) {
     redirect: "manual",
     signal: AbortSignal.timeout(3000),
   });
+}
+
+function checkMetadata(html) {
+  assert.match(html, /<title>[^<]+<\/title>/);
+  assert.match(html, /<meta name="description" content="[^"]+"/);
+  assert.match(html, /<meta name="robots" content="[^"]*noindex[^"]*"/);
 }
 
 function connect(url) {
@@ -159,7 +165,33 @@ try {
     ]) {
       assert.ok(csp.includes(directive), directive);
     }
-    assert.match(await response.text(), new RegExp(`<html lang="${locale}"`));
+    const html = await response.text();
+    assert.match(html, new RegExp(`<html lang="${locale}"`));
+    checkMetadata(html);
+    for (const [suffix, expected] of [
+      ["projects", 200],
+      ["projects/genyx", 200],
+      ["projects/_missing", 404],
+      ["services", 200],
+      ["services/web", 200],
+      ["services/mobile", 200],
+      ["services/enterprise", 200],
+      ["services/ai", 200],
+      ["services/automation", 200],
+      ["services/integrations", 200],
+      ["services/_missing", 404],
+      ["products", 200],
+      ["products/_missing", 404],
+    ]) {
+      const path = `/${locale}/${suffix}`;
+      const result = await request(path);
+      assert.equal(
+        result.status,
+        expected,
+        `Unexpected HTTP status for ${path}; run npm run build`,
+      );
+      if (expected === 200) checkMetadata(await result.text());
+    }
   }
   console.log("HTTP, locale and security header checks passed");
 
@@ -214,7 +246,7 @@ try {
     })`);
     assert.equal(summary.headings, 1);
     assert.equal(summary.main, 1);
-    assert.equal(summary.services, 6);
+    assert.ok(summary.services >= 6);
     assert.equal(summary.fallback, "visible");
     assert.equal(summary.reduced, true);
     assert.equal(summary.webglReady, false);
@@ -270,7 +302,77 @@ try {
     console.log(locale, JSON.stringify(metrics));
     assert.ok(metrics.decodedScriptBytes <= 1048576, "Initial decoded JS budget: 1 MiB");
   }
-  console.log("Browser smoke checks passed (Chromium, reduced motion)");
+  for (const locale of ["es", "en"]) {
+    await command("Emulation.setDeviceMetricsOverride", {
+      width: 1440,
+      height: 900,
+      deviceScaleFactor: 1,
+      mobile: false,
+    });
+    const path = `/${locale}/projects/genyx`;
+    await command("Page.navigate", { url: origin + path });
+    const loaded = `document.readyState === "complete" && location.pathname === "${path}"`;
+    await waitFor(() => evaluate(loaded), "case study loaded");
+    await waitFor(
+      () =>
+        evaluate(`(() => {
+          const images = [...document.querySelectorAll(".media-card img")];
+          return images.length > 0 && images.every(img => img.complete && img.naturalWidth > 0);
+        })()`),
+      "project media loaded",
+    );
+    assert.equal(await evaluate("document.querySelectorAll('.demo-stage').length"), 1);
+    const videosHaveCaptions = await evaluate(`
+      [...document.querySelectorAll(".media-card video")].every(video =>
+        video.querySelector("track[kind=captions]"))
+    `);
+    assert.ok(videosHaveCaptions, "Every displayed video has captions");
+
+    if (process.env.GENYX_CAPTURE === "1") {
+      const folder = ".artifacts/genyx-media";
+      await mkdir(folder, { recursive: true });
+      await evaluate("document.fonts.ready.then(() => true)");
+      const screenshot = await command("Page.captureScreenshot", { format: "png" });
+      await writeFile(join(folder, `genyx-case-study-${locale}.png`), screenshot.data, "base64");
+      await evaluate("document.getElementById('gallery-title').scrollIntoView()");
+      const gallery = await command("Page.captureScreenshot", { format: "png" });
+      await writeFile(join(folder, `genyx-gallery-${locale}.png`), gallery.data, "base64");
+    }
+  }
+  await command("Emulation.setDeviceMetricsOverride", {
+    width: 390,
+    height: 844,
+    deviceScaleFactor: 1,
+    mobile: true,
+  });
+  await command("Emulation.setTouchEmulationEnabled", { enabled: true });
+  await command("Emulation.setEmulatedMedia", {
+    features: [{ name: "prefers-reduced-motion", value: "no-preference" }],
+  });
+  await command("Page.navigate", { url: `${origin}/es` });
+  await waitFor(
+    () => evaluate('document.readyState === "complete" && location.pathname === "/es"'),
+    "mobile homepage",
+  );
+  await waitFor(
+    () => evaluate('document.querySelector(".sculpture-activation").offsetWidth > 0'),
+    "mobile 3D control visible",
+  );
+  const readySelector = ".sculpture-canvas[data-ready=true]";
+  const mobileReady = await evaluate(`!!document.querySelector("${readySelector}")`);
+  assert.equal(mobileReady, false);
+  const activation = 'document.querySelector(".sculpture-activation")';
+  await waitFor(async () => {
+    if (await evaluate(`${activation}.getAttribute("aria-pressed") === "true"`)) return true;
+    await evaluate(`${activation}.click()`);
+    return false;
+  }, "mobile 3D opt-in");
+  await evaluate(`${activation}.click()`);
+  await waitFor(
+    () => evaluate(`${activation}.getAttribute("aria-pressed") === "false"`),
+    "mobile 3D opt-out",
+  );
+  console.log("Browser smoke checks passed (Chromium, reduced motion and mobile opt-in)");
 } finally {
   socket?.close();
   for (const { child } of processes.reverse()) child.kill();

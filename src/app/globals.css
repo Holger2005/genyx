@@ -599,3 +599,202 @@ h2 {
     background: radial-gradient(ellipse at center, #ffffff0d, transparent 67%);
   }
 }
+
+.portfolio-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  padding-block: clamp(3rem, 8vw, 7rem);
+}
+
+.portfolio-main h1 {
+  overflow-wrap: anywhere;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  gap: 1.5rem;
+}
+
+.project-card {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.project-art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 12rem;
+  aspect-ratio: 16 / 7;
+  background: radial-gradient(ellipse at center, #303033, #101012 72%);
+}
+
+.project-art > span {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.project-symbol {
+  width: 28%;
+  aspect-ratio: 1;
+  border: 1px solid #c8c8cc;
+  transform: rotate(45deg);
+  box-shadow: inset 0 0 2rem #ffffff12;
+}
+
+.project-copy {
+  display: grid;
+  min-width: 0;
+  gap: 1rem;
+  padding: clamp(1.25rem, 3vw, 2.5rem);
+  overflow-wrap: anywhere;
+}
+
+.project-copy h3 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+
+.project-copy > p:not(.eyebrow) {
+  color: var(--muted);
+}
+
+.technology-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.technology-list li {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.project-copy .action,
+.portfolio-main .action,
+#work > .action {
+  justify-self: start;
+  max-width: 100%;
+}
+
+.project-capabilities {
+  list-style: disc;
+  padding-inline-start: 1.5rem;
+  color: var(--muted);
+}
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+  gap: 1.5rem;
+}
+
+.media-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.media-card img,
+.media-card video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.media-card figcaption,
+.media-video details {
+  display: grid;
+  gap: 0.5rem;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.media-card h3 {
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+.media-card p {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.media-video summary {
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.demo-stage {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
+
+.catalog-nav {
+  flex-wrap: wrap;
+}
+
+.service-card h2 {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  overflow-wrap: anywhere;
+}
+
+.service-card a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+#services > .action,
+#products > .action {
+  justify-self: start;
+  max-width: 100%;
+}
+
+/* Start with SVG on mobile; the user can opt in to GPU rendering. */
+.sculpture-activation {
+  position: absolute;
+  bottom: 4%;
+  left: 4%;
+  min-height: 44px;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--foreground);
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.sculpture-activation[aria-pressed="true"] {
+  border-color: var(--foreground);
+}
+
+@media (min-width: 900px) and (hover: hover) and (pointer: fine) {
+  .sculpture-activation {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sculpture-activation {
+    display: none;
+  }
+}
