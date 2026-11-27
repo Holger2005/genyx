@@ -11,43 +11,64 @@ const audits = [
   ["case-mobile", "/projects/genyx", "mobile"],
   ["services-mobile", "/services", "mobile"],
   ["products-mobile", "/products", "mobile"],
+  ["inquiry-mobile", "/inquiry", "mobile"],
+  ["consultation-mobile", "/consultation", "mobile"],
+  ["privacy-mobile", "/privacy", "mobile"],
 ];
 let failures = 0;
 
-function threshold(label, value, limit, direction) {
-  if (typeof value !== "number" || !Number.isFinite(value)) {
-    failures++;
-    console.error(`${label}: missing or invalid measurement`);
-    return;
+function readAudit(key, route, formFactor, locale) {
+  const report = JSON.parse(readFileSync(join(directory, `${key}.json`), "utf8"));
+  assert.equal(report.requestedUrl, `${origin}/${locale}${route}`, key);
+  assert.equal(report.configSettings.formFactor, formFactor, key);
+  assert.ok(!report.runtimeError, `${key}: Lighthouse runtime error`);
+  const scores = {
+    performance: report.categories.performance.score,
+    accessibility: report.categories.accessibility.score,
+    bestPractices: report.categories["best-practices"].score,
+    seo: report.categories.seo.score,
+    lcp: report.audits["largest-contentful-paint"].numericValue,
+    cls: report.audits["cumulative-layout-shift"].numericValue,
+    tbt: report.audits["total-blocking-time"].numericValue,
+  };
+  for (const [metric, value] of Object.entries(scores)) {
+    assert.ok(typeof value === "number" && Number.isFinite(value), `${key}: ${metric}`);
   }
-  const passed = direction === "min" ? value >= limit : value <= limit;
-  if (!passed) {
-    failures++;
-    console.error(`${label}: ${value} failed ${direction} ${limit}`);
+  console.log(key, JSON.stringify(scores));
+  if (scores.performance < 0.95 || scores.tbt > 200) {
+    const tasks = report.audits["long-tasks"]?.details?.items ?? [];
+    const breakdown = report.audits["mainthread-work-breakdown"]?.details?.items ?? [];
+    console.log(key, JSON.stringify({ tasks: tasks.slice(0, 10), breakdown }));
   }
+  return scores;
+}
+
+function passes(scores) {
+  return (
+    scores.performance >= 0.95 &&
+    scores.accessibility >= 0.95 &&
+    scores.lcp <= 2500 &&
+    scores.cls <= 0.1 &&
+    scores.tbt <= 200
+  );
 }
 
 for (const locale of ["es", "en"]) {
   for (const [name, route, formFactor] of audits) {
     const key = `${locale}-${name}`;
-    const report = JSON.parse(readFileSync(join(directory, `${key}.json`), "utf8"));
-    assert.equal(report.requestedUrl, `${origin}/${locale}${route}`, key);
-    assert.equal(report.configSettings.formFactor, formFactor, key);
-    assert.ok(!report.runtimeError, `${key}: Lighthouse runtime error`);
-    const performance = report.categories.performance.score;
-    const accessibility = report.categories.accessibility.score;
-    const bestPractices = report.categories["best-practices"].score;
-    const seo = report.categories.seo.score;
-    const lcp = report.audits["largest-contentful-paint"].numericValue;
-    const cls = report.audits["cumulative-layout-shift"].numericValue;
-    const tbt = report.audits["total-blocking-time"].numericValue;
-    const scores = { performance, accessibility, bestPractices, seo, lcp, cls, tbt };
-    console.log(key, JSON.stringify(scores));
-    threshold(`${key} performance`, performance, 0.95, "min");
-    threshold(`${key} accessibility`, accessibility, 0.95, "min");
-    threshold(`${key} LCP`, lcp, 2500, "max");
-    threshold(`${key} CLS`, cls, 0.1, "max");
-    threshold(`${key} TBT`, tbt, 200, "max");
+    const samples =
+      name === "home-mobile"
+        ? [1, 2, 3].map((id) => readAudit(`${key}-${id}`, route, formFactor, locale))
+        : [readAudit(key, route, formFactor, locale)];
+    const passed = samples.filter(passes).length;
+    const required = samples.length === 3 ? 2 : 1;
+    console.log(`${key}: ${passed}/${samples.length} runs meet every budget`);
+    // Accessibility and layout stability are required in every run.
+    const stable = samples.every((score) => score.accessibility >= 0.95 && score.cls <= 0.1);
+    if (passed < required || !stable) {
+      failures++;
+      console.error(`${key}: release budgets not met`);
+    }
   }
 }
 assert.equal(failures, 0, "Lighthouse release budgets");

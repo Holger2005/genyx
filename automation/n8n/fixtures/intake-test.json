@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "testOnly": true,
+  "source": "genyx-test",
+  "requestId": "genyx-test-001",
+  "locale": "es",
+  "service": "automation",
+  "timeline": "urgent"
+}

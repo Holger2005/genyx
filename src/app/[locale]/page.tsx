@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { getWhatsAppNumber } from "../../config/whatsapp";
 import { isLocale } from "../../domain/locale";
 import { getProjects } from "../../application/portfolio/get-projects";
 import { getSiteContent } from "../../application/site-content";
@@ -11,5 +12,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   if (!isLocale(locale)) notFound();
   const content = getSiteContent(staticContentRepository, locale);
   const projects = getProjects(staticProjectRepository, locale);
-  return <FoundationScreen locale={locale} content={content} projects={projects} />;
+  return (
+    <FoundationScreen
+      locale={locale}
+      content={content}
+      projects={projects}
+      whatsappNumber={getWhatsAppNumber(process.env.GENYX_WHATSAPP_NUMBER)}
+    />
+  );
 }
