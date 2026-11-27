@@ -4,7 +4,10 @@ import { test } from "node:test";
 import { verifyN8nTest } from "../../scripts/n8n-crm-bridge.mjs";
 
 const fixture = JSON.parse(
-  await readFile(new URL("../../automation/n8n/fixtures/intake-test.json", import.meta.url), "utf8"),
+  await readFile(
+    new URL("../../automation/n8n/fixtures/intake-test.json", import.meta.url),
+    "utf8",
+  ),
 );
 const token = "a".repeat(64);
 const result = {
@@ -37,7 +40,9 @@ test("refuses invalid credentials and non-synthetic input before transmission", 
   };
   await assert.rejects(verifyN8nTest(fixture, "short", forbidden), /TOKEN/);
   await assert.rejects(verifyN8nTest({ ...fixture, testOnly: false }, token, forbidden));
-  await assert.rejects(verifyN8nTest({ ...fixture, email: "test@example.invalid" }, token, forbidden));
+  await assert.rejects(
+    verifyN8nTest({ ...fixture, email: "test@example.invalid" }, token, forbidden),
+  );
 });
 
 test("refuses unauthorized, unavailable, mismatched and oversized responses", async () => {
