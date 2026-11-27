@@ -60,7 +60,9 @@ async function readForm(request) {
     chunks.push(chunk);
   }
   const params = new URLSearchParams(Buffer.concat(chunks).toString("utf8"));
-  if (new Set(params.keys()).size !== [...params.keys()].length) throw new Error("Duplicate fields");
+  if (new Set(params.keys()).size !== [...params.keys()].length) {
+    throw new Error("Duplicate fields");
+  }
   return params;
 }
 
@@ -98,12 +100,16 @@ export function createAdminServer(repository, accessToken, clock = Date.now) {
         return html(response, 404, "Not found");
       }
       if (request.url === "/login") {
+        const form = await readForm(request);
         failures = failures.filter((time) => clock() - time < failureWindow);
         if (failures.length >= 5) {
           response.setHeader("Retry-After", "60");
-          return html(response, 429, loginPage("Demasiados intentos. Intenta nuevamente más tarde."));
+          return html(
+            response,
+            429,
+            loginPage("Demasiados intentos. Intenta nuevamente más tarde."),
+          );
         }
-        const form = await readForm(request);
         if ([...form.keys()].length !== 1 || !equalToken(form.get("token"), accessToken)) {
           failures.push(clock());
           return html(response, 401, loginPage("Clave incorrecta."));
@@ -115,7 +121,13 @@ export function createAdminServer(repository, accessToken, clock = Date.now) {
       }
       if (!authenticated) return html(response, 401, loginPage());
       const form = await readForm(request);
-      if (!session || !equalToken(form.get("csrf"), session.csrf)) {
+      if (
+        !session ||
+        clock() >= session.expiresAt ||
+        matching.length !== 1 ||
+        !equalToken(matching[0].split("=")[1], session.id) ||
+        !equalToken(form.get("csrf"), session.csrf)
+      ) {
         return html(response, 403, "Forbidden");
       }
       if (request.url === "/logout") {

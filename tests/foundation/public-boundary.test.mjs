@@ -37,6 +37,7 @@ test("rejects direct, re-exported, aliased, and dynamic private imports", () => 
 
 test("blocks private credential references, but permits public contact configuration", () => {
   assert.ok(inspectPublicSource(page, "process.env.GENYX_N8N_TEST_TOKEN").length > 0);
+  assert.ok(inspectPublicSource(page, "process.env.GENYX_ADMIN_TOKEN").length > 0);
   assert.ok(inspectPublicSource(page, "process.env.NEXT_PUBLIC_ADMIN_SECRET").length > 0);
   assert.deepEqual(inspectPublicSource(page, "process.env.GENYX_GOOGLE_BOOKING_URL"), []);
   assert.deepEqual(inspectPublicSource(page, "process.env.GENYX_WHATSAPP_NUMBER"), []);
