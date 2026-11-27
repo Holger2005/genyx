@@ -19,6 +19,14 @@ dashboard for synthetic CRM records. A randomly generated local token opens a
 require the same origin and CSRF token, and logout revokes the session.
 The public application remains unchanged. See [admin setup](admin.md).
 
+## 4.3 — PostgreSQL foundation
+
+The private synthetic CRM schema adds explicit membership, owner-scoped RLS,
+column grants, derived priority and database-enforced stage history. The
+isolated PostgreSQL 17 test runs with a test-only Supabase Auth shim.
+See [database setup](postgres.md). Cloud provisioning and the production
+adapter remain separate acceptance gates.
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.
