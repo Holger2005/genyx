@@ -28,14 +28,14 @@ Official references reviewed on 2026-11-27:
 
 ## Data inventory and proposed retention
 
-| Activity | Current status | Decision before production |
-| --- | --- | --- |
-| Local questionnaire | Browser draft only | No sensitive or confidential data |
-| Contact links | Optional external providers | Review Google and WhatsApp notices and transfers |
-| Lead CRM | Synthetic only | Approve minimum fields and purpose-specific retention |
-| Operator identity | Temporary local token | Managed identity, MFA, least privilege and revocation |
-| Security events | Local/test only | Minimal event metadata and protected logs |
-| Backups | No verified production restore | Encrypt, restrict access, test recovery and deletion |
+| Activity            | Current status                 | Decision before production                            |
+| ------------------- | ------------------------------ | ----------------------------------------------------- |
+| Local questionnaire | Browser draft only             | No sensitive or confidential data                     |
+| Contact links       | Optional external providers    | Review Google and WhatsApp notices and transfers      |
+| Lead CRM            | Synthetic only                 | Approve minimum fields and purpose-specific retention |
+| Operator identity   | Temporary local token          | Managed identity, MFA, least privilege and revocation |
+| Security events     | Local/test only                | Minimal event metadata and protected logs             |
+| Backups             | No verified production restore | Encrypt, restrict access, test recovery and deletion  |
 
 Proposal for future review: remove inactive prospect data after 90 days unless
 a documented lawful purpose requires longer retention. Review operational
