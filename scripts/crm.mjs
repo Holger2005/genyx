@@ -1,13 +1,10 @@
 import { mkdir, readFile } from "node:fs/promises";
-import { homedir } from "node:os";
 import { join } from "node:path";
 import { moveLead, recordTestLead } from "../src/application/crm/lead-repository.ts";
 import { SqliteLeadRepository } from "../src/infrastructure/crm/sqlite-lead-repository.ts";
+import { crmDirectory } from "./crm-location.mjs";
 
-const directory =
-  process.platform === "win32"
-    ? join(process.env.LOCALAPPDATA || join(homedir(), "AppData", "Local"), "Genyx")
-    : join(homedir(), ".local", "share", "genyx");
+const directory = crmDirectory();
 const path = join(directory, "crm-lab.sqlite");
 const [command = "help", id, stage] = process.argv.slice(2);
 

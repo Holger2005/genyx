@@ -42,9 +42,9 @@ Never insert actual customer data into this laboratory.
 
 Unit tests cover validation, persistence, duplicate IDs, transitions, history
 and reopened SQLite connections. A CLI smoke test creates and removes an isolated
-temporary synthetic database, without touching the owner's database. The n8n test workflow remains unchanged and
-does not write to this database. The demo imports the same fixture locally,
-not a live webhook result.
+temporary synthetic database, without touching the owner's database. The n8n test workflow remains unchanged and does not write directly to this database.
+Use the optional local bridge (see [security gates](commercial-security.md)) to
+verify a live synthetic classification before recording it.
 
 ## Before enabling real intake
 

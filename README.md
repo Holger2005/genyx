@@ -76,6 +76,11 @@ See [n8n setup](docs/n8n.md) for the optional local synthetic intake workflow.
 Use `npm run crm -- demo` to create a local synthetic opportunity. See
 [CRM setup](docs/crm.md) for the available commands and safety limitations.
 
+## Security and privacy laboratory
+
+See [commercial security gates](docs/commercial-security.md) for the local n8n-to-CRM bridge.
+Real customer intake remains disabled.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

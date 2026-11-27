@@ -40,6 +40,7 @@ export function PortfolioShell({
       <footer className="footer">
         <Brand />
         <Link href={`/${locale}`}>{locale === "es" ? "Inicio" : "Home"}</Link>
+        <Link href={`/${locale}/privacy`}>{locale === "es" ? "Privacidad" : "Privacy"}</Link>
       </footer>
     </div>
   );

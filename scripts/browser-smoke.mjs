@@ -184,6 +184,7 @@ try {
       ["products/_missing", 404],
       ["inquiry", 200],
       ["consultation", 200],
+      ["privacy", 200],
     ]) {
       const path = `/${locale}/${suffix}`;
       const result = await request(path);

@@ -73,6 +73,17 @@ fields, automatic webhook persistence or network submission is enabled.
 See [CRM laboratory](crm.md). SQLite is built into the supported Node versions;
 the CLI uses type stripping and the experimental SQLite flag for Node 22.
 
+## Iteration 3.7 — Security and privacy laboratory
+
+An explicit local CLI calls the authenticated n8n test webhook, verifies the exact
+synthetic classification against the original request, and only then writes the
+synthetic lead through the idempotent CRM repository. Fixed loopback endpoint,
+credential format validation, disabled redirects, timeout, bounded response and
+strict matching prevent accidental external transmission or unverified writes.
+The existing n8n workflow remains unchanged. A bilingual prototype privacy notice
+describes current behavior; it is not a final legal policy. No public admin route,
+real intake, or production authentication is enabled. See [security gates](commercial-security.md).
+
 ## Next gates
 
 - Confirm CI, CodeQL and the release 0.3.0 quality gates before integration.
