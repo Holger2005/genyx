@@ -24,7 +24,9 @@ export function CinematicMenu({
         className="menu-trigger"
         type="button"
         aria-haspopup="dialog"
-        onClick={() => dialog.current?.showModal()}
+        onClick={() => {
+          if (dialog.current && !dialog.current.open) dialog.current.showModal();
+        }}
       >
         {menu}
         <span aria-hidden="true" className="menu-icon" />
@@ -38,7 +40,15 @@ export function CinematicMenu({
         </div>
         <nav aria-label={menu}>
           {links.map((link, index) => (
-            <a key={link.href} href={link.href} onClick={() => dialog.current?.close()}>
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => {
+                dialog.current?.close();
+                const target = document.getElementById(link.href.slice(1));
+                target?.focus({ preventScroll: true });
+              }}
+            >
               <span className="menu-number">{String(index + 1).padStart(2, "0")}</span>
               <span>{link.label}</span>
               <span aria-hidden="true" className="menu-arrow">
