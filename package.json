@@ -25,7 +25,8 @@
     "crm:sync": "node --experimental-sqlite --experimental-strip-types --disable-warning=ExperimentalWarning scripts/crm-sync.mjs",
     "crm": "node --experimental-sqlite --experimental-strip-types --disable-warning=ExperimentalWarning scripts/crm.mjs",
     "test:lighthouse": "node scripts/check-lighthouse.mjs",
-    "architecture": "node scripts/check-architecture.mjs",
+    "architecture": "node scripts/check-architecture.mjs && node scripts/check-public-boundary.mjs",
+    "test:boundary": "node --test tests/foundation/public-boundary.test.mjs",
     "test:foundation": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test tests/foundation/locale.test.mjs",
     "check": "npm run architecture && npm run lint && npm run format:check && npm run typecheck && npm run test:coverage && npm run build",
     "audit:security": "npm audit --audit-level=high"
