@@ -1,9 +1,18 @@
+import { SculptureCanvas } from "./sculpture-canvas";
+
 export function SculpturePreview() {
   return (
     <div className="sculpture" aria-hidden="true">
       <svg viewBox="0 0 560 560" fill="none" className="sculpture-art">
         <defs>
-          <linearGradient id="metal" x1="30" y1="60" x2="490" y2="510" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="metal"
+            x1="30"
+            y1="60"
+            x2="490"
+            y2="510"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop stopColor="#f5f5f7" />
             <stop offset=".24" stopColor="#515153" />
             <stop offset=".43" stopColor="#d7d7dc" />
@@ -11,7 +20,14 @@ export function SculpturePreview() {
             <stop offset=".82" stopColor="#aaaab0" />
             <stop offset="1" stopColor="#f5f5f7" />
           </linearGradient>
-          <linearGradient id="glass" x1="120" y1="80" x2="430" y2="490" gradientUnits="userSpaceOnUse">
+          <linearGradient
+            id="glass"
+            x1="120"
+            y1="80"
+            x2="430"
+            y2="490"
+            gradientUnits="userSpaceOnUse"
+          >
             <stop stopColor="#f5f5f7" stopOpacity=".46" />
             <stop offset=".5" stopColor="#9a9aa0" stopOpacity=".05" />
             <stop offset="1" stopColor="#f5f5f7" stopOpacity=".36" />
@@ -46,6 +62,7 @@ export function SculpturePreview() {
           <path d="M280 112 136 365 424 365Z" stroke="#f5f5f7" strokeOpacity=".28" />
         </g>
       </svg>
+      <SculptureCanvas />
       <span className="sculpture-index">G / 001</span>
     </div>
   );

@@ -193,6 +193,23 @@ h2 {
   height: auto;
 }
 
+.sculpture-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sculpture-canvas[data-ready="true"] {
+  opacity: 1;
+}
+
+.sculpture:has(.sculpture-canvas[data-ready="true"]) .sculpture-art {
+  visibility: hidden;
+}
+
 .sculpture-core {
   transform-origin: center;
   transition: transform 500ms ease;
