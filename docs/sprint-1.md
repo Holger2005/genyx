@@ -36,6 +36,18 @@ No new dependencies were added. Page entry motion is implemented, but a full cro
 exit/entry transition is not yet implemented. Shader normals are approximate during deformation;
 the materials remain stylized rather than physically based.
 
+## Iteration 1.4
+
+- Decorative monochrome ambient glow, perspective-inspired grid and static points of light.
+- Pointer-driven light position, bounded coordinates and on-demand frame scheduling.
+- WebGL key light responds to pointer movement with a secondary fill light.
+- Static ambient lighting for reduced motion and touch devices; fewer details on small screens.
+- Unit tests for pointer normalization and invalid input.
+- No new runtime dependencies, external requests or persistent tracking.
+
+The background is CSS-based and the light model remains stylized. GPU performance and
+visual quality require browser and real-device verification.
+
 ## Manual verification
 
 - Open `/es` and `/en` and check all six service descriptions.
@@ -47,4 +59,6 @@ the materials remain stylized rather than physically based.
 - Verify that unfinished commercial integrations do not claim to accept requests.
 - Verify scroll-linked reveals and progress in supported browsers and static fallback elsewhere.
 - Check geometry morphing and keyboard focus after selecting a modal link.
+- Verify ambient light on pointer movement and its static behavior on touch and reduced motion.
+- Check that the decorative layer never intercepts clicks or reduces text legibility.
 - Record Lighthouse and real-device measurements before claiming performance targets.

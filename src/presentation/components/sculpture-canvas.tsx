@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { normalizedPointer } from "../graphics/ambient-motion";
 import { createSculptureRenderer } from "../graphics/sculpture-renderer";
 
 export function SculptureCanvas() {
@@ -10,6 +11,9 @@ export function SculptureCanvas() {
     const canvas = ref.current;
     const host = canvas?.parentElement;
     if (!canvas || !host) return;
+    if (typeof IntersectionObserver === "undefined" || typeof ResizeObserver === "undefined") {
+      return;
+    }
 
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let renderer: ReturnType<typeof createSculptureRenderer> = null;
@@ -35,6 +39,7 @@ export function SculptureCanvas() {
       const rect = host.getBoundingClientRect();
       const progress = Math.max(-1, Math.min(1, -rect.top / Math.max(window.innerHeight, 1)));
       if (renderer.draw(x, y, progress * 0.8)) canvas.dataset.ready = "true";
+      else hide();
     }
 
     function schedule() {
@@ -46,8 +51,8 @@ export function SculptureCanvas() {
     function pointer(event: PointerEvent) {
       if (!host || event.pointerType === "touch") return;
       const rect = host.getBoundingClientRect();
-      x = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
-      y = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+      x = normalizedPointer(event.clientX, rect.left, rect.width);
+      y = normalizedPointer(event.clientY, rect.top, rect.height);
       schedule();
     }
 

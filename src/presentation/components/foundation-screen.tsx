@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SiteContent } from "../../application/site-content";
 import { alternateLocale, type Locale } from "../../domain/locale";
+import { AmbientEnvironment } from "./ambient-environment";
 import { Brand } from "./brand";
 import { CinematicMenu } from "./cinematic-menu";
 import { SculpturePreview } from "./sculpture-preview";
@@ -33,6 +34,7 @@ export function FoundationScreen({ locale, content }: { locale: Locale; content:
       </header>
       <main id="home" tabIndex={-1}>
         <section className="hero" aria-labelledby="hero-title">
+          <AmbientEnvironment />
           <div className="hero-copy">
             <p className="eyebrow">{content.eyebrow}</p>
             <h1 id="hero-title">{content.title}</h1>

@@ -508,3 +508,72 @@ h2 {
     transform: scaleX(1);
   }
 }
+
+/* Decorative environment: no external images or continuous animation loop. */
+.hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.ambient-environment {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  --ambient-x: 50%;
+  --ambient-y: 50%;
+}
+
+.ambient-glow,
+.ambient-grid,
+.ambient-particles {
+  position: absolute;
+  inset: 0;
+}
+
+.ambient-glow {
+  background: radial-gradient(
+    ellipse at var(--ambient-x) var(--ambient-y),
+    #ffffff0d 0%,
+    #ffffff04 32%,
+    transparent 67%
+  );
+}
+
+.ambient-grid {
+  background-image:
+    linear-gradient(#ffffff08 1px, transparent 1px),
+    linear-gradient(90deg, #ffffff08 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse at 75% 50%, black 0%, transparent 72%);
+}
+
+.ambient-particles {
+  background-image:
+    radial-gradient(circle at 17% 28%, #ffffff32 1px, transparent 2px),
+    radial-gradient(circle at 39% 71%, #ffffff20 1px, transparent 2px),
+    radial-gradient(circle at 65% 14%, #ffffff42 1px, transparent 2px),
+    radial-gradient(circle at 83% 62%, #ffffff28 1px, transparent 2px),
+    radial-gradient(circle at 91% 35%, #ffffff36 1px, transparent 2px);
+}
+
+.sculpture {
+  background: radial-gradient(ellipse at center, #242426a0 0%, transparent 68%);
+}
+
+@media (max-width: 600px) {
+  .ambient-grid {
+    background-size: 48px 48px;
+  }
+
+  .ambient-particles {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-glow {
+    background: radial-gradient(ellipse at center, #ffffff0d, transparent 67%);
+  }
+}
