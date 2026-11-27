@@ -49,6 +49,9 @@ describe("portfolio publication", () => {
         "genyx",
       ]);
       expect(getProjectDetail(staticProjectRepository, locale, "genyx")?.limitations).toBeTruthy();
+      const media = getProjectDetail(staticProjectRepository, locale, "genyx")?.media;
+      expect(media).toHaveLength(2);
+      expect(media?.every((item) => item.kind === "image")).toBe(true);
     }
   });
 });

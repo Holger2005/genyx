@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { getProjectDetail, getProjects } from "../../../../application/portfolio/get-projects";
 import { isLocale } from "../../../../domain/locale";
 import { staticProjectRepository } from "../../../../infrastructure/portfolio/static-project-repository";
+import { GenyxDemo } from "../../../../presentation/portfolio/genyx-demo";
+import { ProjectGallery } from "../../../../presentation/portfolio/project-gallery";
 import { PortfolioShell } from "../../../../presentation/portfolio/portfolio-shell";
 
 export const dynamicParams = false;
@@ -49,6 +51,8 @@ export default async function ProjectPage({
           ))}
         </ul>
       </section>
+      <ProjectGallery locale={locale} media={project.media ?? []} />
+      {project.slug === "genyx" && <GenyxDemo locale={locale} />}
       <section className="section">
         <h2>{es ? "Alcance actual" : "Current scope"}</h2>
         <p className="description">{project.limitations}</p>

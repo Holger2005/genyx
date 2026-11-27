@@ -1,5 +1,6 @@
 import type { ProjectRepository } from "../../application/portfolio/project-repository";
 import type { Project } from "../../domain/portfolio/project";
+import { genyxMedia } from "./genyx-media";
 
 const projects: readonly Project[] = [
   {
@@ -9,6 +10,7 @@ const projects: readonly Project[] = [
     content: {
       es: {
         title: "Genyx — Experiencia digital",
+        media: genyxMedia.es,
         summary: "Prototipo corporativo propio con una escultura 3D y arquitectura por capas.",
         challenge: "Presentar capacidades de ingeniería mediante una experiencia visual ligera.",
         approach:
@@ -23,6 +25,7 @@ const projects: readonly Project[] = [
       },
       en: {
         title: "Genyx — Digital experience",
+        media: genyxMedia.en,
         summary: "First-party corporate prototype with a 3D sculpture and layered architecture.",
         challenge: "Present engineering capabilities through a lightweight visual experience.",
         approach:

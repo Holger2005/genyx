@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { setTimeout as delay } from "node:timers/promises";
@@ -272,6 +272,42 @@ try {
     })`);
     console.log(locale, JSON.stringify(metrics));
     assert.ok(metrics.decodedScriptBytes <= 1048576, "Initial decoded JS budget: 1 MiB");
+  }
+  for (const locale of ["es", "en"]) {
+    await command("Emulation.setDeviceMetricsOverride", {
+      width: 1440,
+      height: 900,
+      deviceScaleFactor: 1,
+      mobile: false,
+    });
+    const path = `/${locale}/projects/genyx`;
+    await command("Page.navigate", { url: origin + path });
+    await waitFor(
+      () =>
+        evaluate(`document.readyState === "complete" && location.pathname === "${path}"`),
+      "case study loaded",
+    );
+    await waitFor(
+      () =>
+        evaluate(`(() => {
+          const images = [...document.querySelectorAll(".media-card img")];
+          return images.length === 2 && images.every(img => img.complete && img.naturalWidth > 0);
+        })()`),
+      "project media loaded",
+    );
+    assert.equal(await evaluate("document.querySelectorAll('.demo-stage').length"), 1);
+    assert.equal(await evaluate("document.querySelectorAll('.media-card video').length"), 0);
+
+    if (process.env.GENYX_CAPTURE === "1") {
+      const folder = ".artifacts/genyx-media";
+      await mkdir(folder, { recursive: true });
+      await evaluate("document.fonts.ready.then(() => true)");
+      const screenshot = await command("Page.captureScreenshot", { format: "png" });
+      await writeFile(join(folder, `genyx-case-study-${locale}.png`), screenshot.data, "base64");
+      await evaluate("document.getElementById('gallery-title').scrollIntoView()");
+      const gallery = await command("Page.captureScreenshot", { format: "png" });
+      await writeFile(join(folder, `genyx-gallery-${locale}.png`), gallery.data, "base64");
+    }
   }
   console.log("Browser smoke checks passed (Chromium, reduced motion)");
 } finally {

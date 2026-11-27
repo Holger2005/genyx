@@ -695,3 +695,52 @@ h2 {
   padding-inline-start: 1.5rem;
   color: var(--muted);
 }
+
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 25rem), 1fr));
+  gap: 1.5rem;
+}
+
+.media-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.media-card img,
+.media-card video {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.media-card figcaption,
+.media-video details {
+  display: grid;
+  gap: 0.5rem;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.media-card h3 {
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+}
+
+.media-card p {
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.media-video summary {
+  cursor: pointer;
+  min-height: 44px;
+}
+
+.demo-stage {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem;
+}
