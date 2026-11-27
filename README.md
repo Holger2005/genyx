@@ -96,7 +96,8 @@ It is a separate loopback-only process, never a public Next.js route.
 ## PostgreSQL foundation
 
 See [PostgreSQL setup](docs/postgres.md) for the synthetic-only migration and
-isolated Docker checks. The local dashboard still uses SQLite.
+isolated Docker checks. See [n8n PostgreSQL bridge](docs/n8n-postgres.md) for a live
+synthetic integration test. The local dashboard still uses SQLite.
 
 ## Content management
 

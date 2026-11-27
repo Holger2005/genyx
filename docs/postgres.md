@@ -21,7 +21,8 @@ No client keys or database passwords belong in the public application.
 
 Stage transitions match the existing SQLite domain. Terminal records cannot
 be advanced. Request IDs are unique per owner; duplicate submissions fail
-with a unique violation. Future ingestion must handle conflicts explicitly.
+with a unique violation on direct insertion. The later ingestion function
+handles exact replays; see [n8n PostgreSQL bridge](n8n-postgres.md).
 No user can update ownership, membership, priority, or audit rows through
 the granted application privileges.
 

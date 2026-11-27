@@ -27,6 +27,14 @@ isolated PostgreSQL 17 test runs with a test-only Supabase Auth shim.
 See [database setup](postgres.md). Cloud provisioning and the production
 adapter remain separate acceptance gates.
 
+## 4.4 — Synthetic n8n PostgreSQL integration
+
+An invoker-rights ingestion function preserves owner isolation and handles exact
+replays without resetting the stage or duplicating history. The local operator
+can validate a live n8n response before exercising the database in a disposable
+container. CI uses an explicitly simulated response. See [integration setup](n8n-postgres.md).
+A hosted adapter and real commercial intake remain disabled.
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.
