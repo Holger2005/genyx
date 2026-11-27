@@ -160,9 +160,15 @@ try {
       assert.ok(csp.includes(directive), directive);
     }
     assert.match(await response.text(), new RegExp(`<html lang="${locale}"`));
-    assert.equal((await request(`/${locale}/projects`)).status, 200);
-    assert.equal((await request(`/${locale}/projects/genyx`)).status, 200);
-    assert.equal((await request(`/${locale}/projects/unpublished`)).status, 404);
+    for (const [suffix, expected] of [
+      ["projects", 200],
+      ["projects/genyx", 200],
+      ["projects/unpublished", 404],
+    ]) {
+      const path = `/${locale}/${suffix}`;
+      const result = await request(path);
+      assert.equal(result.status, expected, `Unexpected HTTP status for ${path}; run npm run build`);
+    }
   }
   console.log("HTTP, locale and security header checks passed");
 
@@ -282,11 +288,8 @@ try {
     });
     const path = `/${locale}/projects/genyx`;
     await command("Page.navigate", { url: origin + path });
-    await waitFor(
-      () =>
-        evaluate(`document.readyState === "complete" && location.pathname === "${path}"`),
-      "case study loaded",
-    );
+    const loaded = `document.readyState === "complete" && location.pathname === "${path}"`;
+    await waitFor(() => evaluate(loaded), "case study loaded");
     await waitFor(
       () =>
         evaluate(`(() => {
