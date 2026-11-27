@@ -2,12 +2,24 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import { isLocale, locales } from "../../domain/locale";
+import { getSiteContent } from "../../application/site-content";
+import { staticContentRepository } from "../../infrastructure/content/static-content";
 import "../globals.css";
 
-export const metadata: Metadata = {
-  title: "Genyx — Engineering what comes next",
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  const copy = getSiteContent(staticContentRepository, locale);
+  return {
+    title: { default: `Genyx — ${copy.title}`, template: "%s | Genyx" },
+    description: copy.description,
+    robots: { index: false, follow: false },
+  };
+}
 
 export const dynamicParams = false;
 

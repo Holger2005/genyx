@@ -1,9 +1,10 @@
+import type { Locale } from "../../domain/locale";
 import { SculptureCanvas } from "./sculpture-canvas";
 
-export function SculpturePreview() {
+export function SculpturePreview({ locale }: { locale: Locale }) {
   return (
-    <div className="sculpture" aria-hidden="true">
-      <svg viewBox="0 0 560 560" fill="none" className="sculpture-art">
+    <div className="sculpture">
+      <svg viewBox="0 0 560 560" fill="none" className="sculpture-art" aria-hidden="true">
         <defs>
           <linearGradient
             id="metal"
@@ -62,8 +63,10 @@ export function SculpturePreview() {
           <path d="M280 112 136 365 424 365Z" stroke="#f5f5f7" strokeOpacity=".28" />
         </g>
       </svg>
-      <SculptureCanvas />
-      <span className="sculpture-index">G / 001</span>
+      <SculptureCanvas locale={locale} />
+      <span className="sculpture-index" aria-hidden="true">
+        G / 001
+      </span>
     </div>
   );
 }
