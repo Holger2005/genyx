@@ -1,6 +1,6 @@
 # Security policy
 
-Genyx v0.2 is a visual development prototype, not a production-ready service.
+Genyx v0.4 is a commercial integration laboratory, not a production-ready service.
 Do not disclose credentials, customer data or vulnerability details in public issues.
 Use GitHub private vulnerability reporting when enabled; otherwise contact the repository owner privately.
 Never commit secrets. Rotate compromised credentials immediately; deleting a file does not erase Git history.
@@ -16,5 +16,6 @@ Never commit secrets. Rotate compromised credentials immediately; deleting a fil
 ## Before production
 
 - Verify CSP, HTTPS/HSTS, dependency audit, backups, incident response and applicable privacy requirements.
-- Establish authenticated server-to-server webhooks before integrating n8n.
+- Keep the authenticated n8n and CRM laboratory local and synthetic; production intake requires
+  separate authentication, authorization, durable storage, retention and abuse controls.
 - Review applicable OWASP ASVS level 2 controls; no certification is claimed.

@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SiteContent } from "../../application/site-content";
 import { alternateLocale, type Locale } from "../../domain/locale";
 import type { PublishedProject } from "../../domain/portfolio/project";
+import { WhatsAppAction } from "../contact/whatsapp-action";
 import { ProjectGrid } from "../portfolio/project-grid";
 import { AmbientEnvironment } from "./ambient-environment";
 import { Brand } from "./brand";
@@ -12,10 +13,12 @@ export function FoundationScreen({
   locale,
   content,
   projects,
+  whatsappNumber,
 }: {
   locale: Locale;
   content: SiteContent;
   projects: readonly PublishedProject[];
+  whatsappNumber: string | null;
 }) {
   const links = [
     { href: "#home", label: content.home },
@@ -33,11 +36,15 @@ export function FoundationScreen({
         {content.skip}
       </a>
       <header className="header">
-        <Link href={`/${locale}`}>
+        <Link prefetch={false} href={`/${locale}`}>
           <Brand />
         </Link>
         <div className="header-actions">
-          <Link href={`/${alternateLocale(locale)}`} lang={alternateLocale(locale)}>
+          <Link
+            prefetch={false}
+            href={`/${alternateLocale(locale)}`}
+            lang={alternateLocale(locale)}
+          >
             {content.language}
           </Link>
           <CinematicMenu menu={content.menu} close={content.close} links={links} />
@@ -71,14 +78,14 @@ export function FoundationScreen({
                 <span className="eyebrow">{String(index + 1).padStart(2, "0")} / G</span>
                 <h3>{service.title}</h3>
                 <p>{service.description}</p>
-                <Link href={`/${locale}/services/${service.slug}`}>
+                <Link prefetch={false} href={`/${locale}/services/${service.slug}`}>
                   {locale === "es" ? "Ver servicio" : "View service"}
                   <span className="sr-only">: {service.title}</span>
                 </Link>
               </article>
             ))}
           </div>
-          <Link className="action action-secondary" href={`/${locale}/services`}>
+          <Link prefetch={false} className="action action-secondary" href={`/${locale}/services`}>
             {locale === "es" ? "Todos los servicios" : "All services"}
           </Link>
         </section>
@@ -92,14 +99,14 @@ export function FoundationScreen({
           <h2 id="work-title">{content.workTitle}</h2>
           <p className="description">{content.workDescription}</p>
           <ProjectGrid locale={locale} projects={projects} />
-          <Link className="action action-secondary" href={`/${locale}/projects`}>
+          <Link prefetch={false} className="action action-secondary" href={`/${locale}/projects`}>
             {locale === "es" ? "Ver portafolio" : "View portfolio"}
           </Link>
         </section>
         <section id="products" className="section" tabIndex={-1}>
           <p className="eyebrow">03 / PRODUCTS</p>
           <h2>{locale === "es" ? "Productos Genyx" : "Genyx products"}</h2>
-          <Link className="action action-secondary" href={`/${locale}/products`}>
+          <Link prefetch={false} className="action action-secondary" href={`/${locale}/products`}>
             {locale === "es" ? "Consultar catálogo" : "Browse catalog"}
           </Link>
         </section>
@@ -117,6 +124,17 @@ export function FoundationScreen({
           <p className="eyebrow">05 / CONTACT</p>
           <h2 id="contact-title">{content.contactTitle}</h2>
           <p className="description">{content.contactDescription}</p>
+          <Link prefetch={false} className="action action-secondary" href={`/${locale}/inquiry`}>
+            {locale === "es" ? "Preparar proyecto" : "Prepare project"}
+          </Link>
+          <Link
+            prefetch={false}
+            className="action action-secondary"
+            href={`/${locale}/consultation`}
+          >
+            {locale === "es" ? "Consultoría de 30 minutos" : "30-minute consultation"}
+          </Link>
+          <WhatsAppAction locale={locale} number={whatsappNumber} />
         </section>
       </main>
       <footer className="footer">
@@ -128,6 +146,9 @@ export function FoundationScreen({
             </a>
           ))}
         </nav>
+        <Link prefetch={false} href={`/${locale}/privacy`}>
+          {locale === "es" ? "Privacidad" : "Privacy"}
+        </Link>
         <p>{content.status}</p>
         <p>GENYX © 2026</p>
       </footer>

@@ -182,6 +182,11 @@ try {
       ["services/_missing", 404],
       ["products", 200],
       ["products/_missing", 404],
+      ["inquiry", 200],
+      ["consultation", 200],
+      ["privacy", 200],
+      ["admin", 404],
+      ["crm", 404],
     ]) {
       const path = `/${locale}/${suffix}`;
       const result = await request(path);
@@ -190,8 +195,18 @@ try {
         expected,
         `Unexpected HTTP status for ${path}; run npm run build`,
       );
-      if (expected === 200) checkMetadata(await result.text());
+      if (expected === 200) {
+        const page = await result.text();
+        checkMetadata(page);
+        if (suffix === "consultation") {
+          assert.ok(page.includes("America/Guayaquil"), "Consultation reference time zone");
+        }
+      }
     }
+  }
+  for (const path of ["/api/leads", "/api/inquiry", "/api/crm", "/admin"]) {
+    const result = await request(path);
+    assert.equal(result.status, 404, `No public administrative or intake route: ${path}`);
   }
   console.log("HTTP, locale and security header checks passed");
 
