@@ -11,7 +11,6 @@ const approvedPages = new Set([
   "src/app/[locale]/services/page.tsx",
   "src/app/[locale]/services/[slug]/page.tsx",
   "src/app/[locale]/products/page.tsx",
-  "src/app/[locale]/products/[slug]/page.tsx",
   "src/app/[locale]/inquiry/page.tsx",
   "src/app/[locale]/consultation/page.tsx",
   "src/app/[locale]/privacy/page.tsx",

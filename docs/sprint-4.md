@@ -43,6 +43,13 @@ See [security and privacy readiness](security-privacy.md) for the risk, retentio
 incident response and commercial release approval checklist.
 Production compliance and hosted security controls are not yet verified.
 
+## 4.6 — Static deployment candidate
+
+The optional static profile builds and audits an export with Cloudflare Pages
+configuration and a loopback preview. The empty product detail route is removed
+until actual products are approved. Normal Node builds remain supported.
+See [deployment setup](deployment.md). No hosting or DNS is configured yet.
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.

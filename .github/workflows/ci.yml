@@ -97,6 +97,10 @@ jobs:
           if-no-files-found: warn
           retention-days: 7
 
+      - name: Static deployment artifact
+        if: ${{ matrix.node-version == 24 }}
+        run: npm run build:static
+
       - name: Security audit
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: npm run audit:security

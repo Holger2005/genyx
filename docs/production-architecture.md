@@ -14,8 +14,8 @@ A separate local administrative dashboard is implemented in Sprint 4.2; it is no
 an approved production backend. See [admin setup](admin.md).
 
 The current Next.js server build remains the supported implementation.
-A static-export proof of concept is the next implementation gate, not an
-already-supported deployment mode.
+The Sprint 4.6 static-export candidate is described in [deployment setup](deployment.md).
+Its CI validation and hosted verification are required before publication.
 
 ## Hosting options reviewed on 2026-11-26
 
