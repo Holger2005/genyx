@@ -16,6 +16,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:content": "vitest run tests/unit/content-validation.test.ts",
     "test:coverage": "vitest run --coverage",
     "test:browser": "node scripts/browser-smoke.mjs",
     "architecture": "node scripts/check-architecture.mjs",

@@ -40,6 +40,17 @@ No prices, fabricated products, payment flows or working inquiry forms are publi
 The contact integration remains a Sprint 3 task. Service descriptions are proposed
 commercial scope, not evidence of prior client work or guaranteed outcomes.
 
+## Iteration 2.5
+
+- Move existing bilingual copy, services, projects and products into editable JSON.
+- Keep the domain and application repository contracts unchanged.
+- Validate required translations, record identifiers, publication states and local media.
+- Add content validation tests and a documented Git-based editorial workflow.
+- Preserve all existing content and the empty SaaS catalog.
+
+See [content management](content-management.md). This is a file-based editorial
+workflow, not a deployed administrative panel. Public repository data is never private.
+
 ## Acceptance gates
 
 - Verify CI, browser smoke tests and CodeQL on the new pull request.
