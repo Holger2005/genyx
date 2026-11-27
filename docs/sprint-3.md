@@ -52,6 +52,16 @@ The visitor reviews and sends the message in WhatsApp. Genyx does not send it
 automatically, collect phone numbers, or use a WhatsApp API. Verify the public
 business number before enabling. See [WhatsApp setup](whatsapp.md).
 
+## Iteration 3.5 — n8n laboratory
+
+An inactive, importable three-node workflow accepts a strictly synthetic test
+envelope through a header-authenticated webhook, validates the allowed fields,
+classifies urgency, and returns a non-persisted result. The public website remains
+unchanged; no personal information, notifications or storage are enabled.
+Node-based tests execute the exported classifier; an explicit local smoke command
+tests the real n8n instance after the owner imports and configures it. See
+[n8n setup](n8n.md). Runtime import and webhook verification remain manual gates.
+
 ## Next gates
 
 - Confirm CI, CodeQL and the release 0.3.0 quality gates before integration.

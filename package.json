@@ -19,6 +19,7 @@
     "test:content": "vitest run tests/unit/content-validation.test.ts",
     "test:coverage": "vitest run --coverage",
     "test:browser": "node scripts/browser-smoke.mjs",
+    "test:n8n": "node scripts/n8n-smoke.mjs",
     "test:lighthouse": "node scripts/check-lighthouse.mjs",
     "architecture": "node scripts/check-architecture.mjs",
     "test:foundation": "node --experimental-strip-types --disable-warning=ExperimentalWarning --test tests/foundation/locale.test.mjs",

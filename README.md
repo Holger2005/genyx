@@ -67,6 +67,10 @@ Reservations remain disabled without an approved configuration.
 
 See [WhatsApp setup](docs/whatsapp.md) for the optional business number.
 
+## Automation laboratory
+
+See [n8n setup](docs/n8n.md) for the optional local synthetic intake workflow.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

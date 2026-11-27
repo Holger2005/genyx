@@ -1,0 +1,77 @@
+{
+  "name": "GENYX - Lead intake laboratory",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "genyx-intake-test",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "1f4a6151-03a7-4d16-9c69-71ad447ec301",
+      "name": "Authenticated test webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [0, 0],
+      "webhookId": "d690a81b-23ba-490a-99a4-63a5ada3ac21"
+    },
+    {
+      "parameters": {
+        "jsCode": "const body = $input.first().json.body;\nconst services = [\"web\", \"mobile\", \"enterprise\", \"ai\", \"automation\", \"integrations\"];\nconst timelines = [\"exploring\", \"urgent\", \"one-to-three\", \"three-plus\"];\nconst fields = [\"schemaVersion\", \"testOnly\", \"source\", \"requestId\", \"locale\", \"service\", \"timeline\"];\nconst valid = body && typeof body === \"object\" && !Array.isArray(body)\n  && Object.keys(body).length === fields.length\n  && Object.keys(body).every((key) => fields.includes(key))\n  && body.schemaVersion === 1 && body.testOnly === true && body.source === \"genyx-test\"\n  && typeof body.requestId === \"string\" && /^genyx-test-[a-z0-9-]{1,48}$/.test(body.requestId)\n  && [\"es\", \"en\"].includes(body.locale)\n  && services.includes(body.service) && timelines.includes(body.timeline);\nif (!valid) return [{ json: { statusCode: 400, ok: false, error: \"invalid_test_payload\" } }];\nconst priority = body.timeline === \"urgent\" ? \"high\" : body.timeline === \"exploring\" ? \"low\" : \"normal\";\nreturn [{ json: { statusCode: 200, ok: true, testOnly: true, requestId: body.requestId, service: body.service, priority, stage: \"new\", persisted: false } }];"
+      },
+      "id": "1f4a6151-03a7-4d16-9c69-71ad447ec302",
+      "name": "Validate and classify",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [260, 0]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ $json }}",
+        "options": {
+          "responseCode": "={{ $json.statusCode }}"
+        }
+      },
+      "id": "1f4a6151-03a7-4d16-9c69-71ad447ec303",
+      "name": "Return test result",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [520, 0]
+    }
+  ],
+  "connections": {
+    "Authenticated test webhook": {
+      "main": [
+        [
+          {
+            "node": "Validate and classify",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validate and classify": {
+      "main": [
+        [
+          {
+            "node": "Return test result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": false,
+    "saveDataSuccessExecution": "none",
+    "saveDataErrorExecution": "none",
+    "saveExecutionProgress": false
+  },
+  "pinData": {}
+}
