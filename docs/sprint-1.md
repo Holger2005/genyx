@@ -65,6 +65,11 @@ These are smoke tests, not Lighthouse or WCAG conformance audits. The navigation
 is not LCP or INP. Field Core Web Vitals, real GPU behavior, cross-browser accessibility,
 full CSP and HTTPS/HSTS verification remain open. The 1 MiB budget is a provisional ceiling.
 
+## Iteration 1.6 — Release candidate
+
+Version 0.2.0 identifies the visual prototype. See [release evidence](releases/v0.2.0.md)
+for the validated baseline, outstanding checks and integration requirements.
+
 ## Manual verification
 
 - Open `/es` and `/en` and check all six service descriptions.

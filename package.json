@@ -1,8 +1,8 @@
 {
   "name": "genyx",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Genyx corporate platform \u2014 Sprint 0",
+  "description": "Genyx corporate platform — Sprint 1 visual prototype",
   "engines": {
     "node": ">=22.12.0 <23 || >=24.0.0 <25"
   },
