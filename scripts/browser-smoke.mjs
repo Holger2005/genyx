@@ -24,6 +24,7 @@ function launch(command, args) {
 
 async function waitFor(check, label) {
   const end = Date.now() + 15000;
+  let lastError;
   while (Date.now() < end) {
     for (const { child, error } of processes) {
       if (error) throw error;
@@ -32,12 +33,12 @@ async function waitFor(check, label) {
     try {
       const result = await check();
       if (result) return result;
-    } catch {
-      // The browser or local server may still be starting.
+    } catch (error) {
+      lastError = error;
     }
     await delay(120);
   }
-  throw new Error(`Timed out: ${label}`);
+  throw new Error(`Timed out: ${label}`, { cause: lastError });
 }
 
 async function request(path) {
@@ -108,11 +109,13 @@ async function evaluate(expression) {
 }
 
 async function key(name, code) {
+  const text = name === "Enter" ? "\r" : undefined;
   await command("Input.dispatchKeyEvent", {
-    type: "keyDown",
+    type: text ? "keyDown" : "rawKeyDown",
     key: name,
     code: name,
     windowsVirtualKeyCode: code,
+    ...(text ? { text, unmodifiedText: text } : {}),
   });
   await command("Input.dispatchKeyEvent", {
     type: "keyUp",
@@ -186,6 +189,8 @@ try {
   socket = await connect(target.webSocketDebuggerUrl);
 
   await command("Page.enable");
+  await command("Page.bringToFront");
+  await command("Emulation.setFocusEmulationEnabled", { enabled: true });
   await command("Emulation.setEmulatedMedia", {
     features: [{ name: "prefers-reduced-motion", value: "reduce" }],
   });
@@ -229,7 +234,12 @@ try {
 
     await waitFor(async () => {
       if (await evaluate("document.querySelector('dialog').open")) return true;
-      await evaluate("document.querySelector('button[aria-haspopup=dialog]').focus()");
+      const focused = await evaluate(`(() => {
+        const button = document.querySelector("button[aria-haspopup=dialog]");
+        button.focus();
+        return document.activeElement === button;
+      })()`);
+      assert.ok(focused, "Menu trigger receives keyboard focus");
       await key("Enter", 13);
       return evaluate("document.querySelector('dialog').open");
     }, "keyboard opens modal");
