@@ -48,6 +48,12 @@ async function request(path) {
   });
 }
 
+function checkMetadata(html) {
+  assert.match(html, /<title>[^<]+<\/title>/);
+  assert.match(html, /<meta name="description" content="[^"]+"/);
+  assert.match(html, /<meta name="robots" content="[^"]*noindex[^"]*"/);
+}
+
 function connect(url) {
   return new Promise((resolve, reject) => {
     const ws = new WebSocket(url);
@@ -159,7 +165,9 @@ try {
     ]) {
       assert.ok(csp.includes(directive), directive);
     }
-    assert.match(await response.text(), new RegExp(`<html lang="${locale}"`));
+    const html = await response.text();
+    assert.match(html, new RegExp(`<html lang="${locale}"`));
+    checkMetadata(html);
     for (const [suffix, expected] of [
       ["projects", 200],
       ["projects/genyx", 200],
@@ -182,6 +190,7 @@ try {
         expected,
         `Unexpected HTTP status for ${path}; run npm run build`,
       );
+      if (expected === 200) checkMetadata(await result.text());
     }
   }
   console.log("HTTP, locale and security header checks passed");

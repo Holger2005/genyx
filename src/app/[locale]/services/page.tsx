@@ -5,6 +5,18 @@ import { staticCatalog } from "../../../infrastructure/catalog/static-catalog";
 import { OfferingGrid } from "../../../presentation/catalog/offering-grid";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  return {
+    title: locale === "es" ? "Servicios especializados" : "Specialized services",
+    description:
+      locale === "es"
+        ? "Soluciones a medida. El alcance se define para cada proyecto."
+        : "Custom solutions. Scope is defined for each project.",
+  };
+}
+
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();

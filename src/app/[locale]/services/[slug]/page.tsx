@@ -11,6 +11,18 @@ export function generateStaticParams({ params }: { params: { locale: string } })
   return getServices(staticCatalog, params.locale).map((item) => ({ slug: item.slug }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
+  if (!isLocale(locale)) notFound();
+  const item = findOffering(getServices(staticCatalog, locale), slug);
+  if (!item) notFound();
+  return { title: item.title, description: item.description };
+}
+
 export default async function DetailPage({
   params,
 }: {
