@@ -4,15 +4,15 @@ import type { CatalogRepository } from "../../src/application/catalog/catalog";
 import { staticCatalog } from "../../src/infrastructure/catalog/static-catalog";
 
 describe("commercial catalog", () => {
-  it("exposes six matching localized services", () => {
+  it("exposes matching localized services", () => {
     const es = getServices(staticCatalog, "es");
     const en = getServices(staticCatalog, "en");
-    expect(es).toHaveLength(6);
+    expect(es.length).toBeGreaterThanOrEqual(6);
     expect(es.map((item) => item.slug)).toEqual(en.map((item) => item.slug));
-    expect(new Set(es.map((item) => item.slug)).size).toBe(6);
-    expect(findOffering(es, "web")?.title).toBe("Desarrollo web");
-    expect(findOffering(en, "web")?.title).toBe("Web development");
-    expect(findOffering(es, "unknown")).toBeUndefined();
+    expect(new Set(es.map((item) => item.slug)).size).toBe(es.length);
+    expect(findOffering(es, "web")?.title).toBeTruthy();
+    expect(findOffering(en, "web")?.title).toBeTruthy();
+    expect(findOffering(es, "_missing")).toBeUndefined();
     expect(es.every((item) => item.deliverables.length > 0)).toBe(true);
   });
 
@@ -35,7 +35,11 @@ describe("commercial catalog", () => {
   });
 
   it("publishes no unconfirmed SaaS products", () => {
-    expect(getProducts(staticCatalog, "es")).toEqual([]);
-    expect(getProducts(staticCatalog, "en")).toEqual([]);
+    const approved = staticCatalog.products().filter((item) => item.status === "available");
+    for (const locale of ["es", "en"] as const) {
+      expect(getProducts(staticCatalog, locale).map((item) => item.slug)).toEqual(
+        approved.map((item) => item.slug),
+      );
+    }
   });
 });

@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "genyx",
+    "status": "published",
+    "technologies": ["Next.js", "React", "TypeScript", "WebGL", "GitHub Actions"],
+    "content": {
+      "es": {
+        "title": "Genyx — Experiencia digital",
+        "media": [
+          {
+            "id": "architecture",
+            "kind": "image",
+            "title": "Arquitectura de Genyx",
+            "caption": "Diagrama propio de las capas actuales y sus dependencias.",
+            "alt": "Presentación y aplicación dependen del dominio; infraestructura implementa el puerto.",
+            "src": "/media/genyx/architecture-es.svg",
+            "width": 800,
+            "height": 480
+          },
+          {
+            "id": "graphics",
+            "kind": "image",
+            "title": "Renderizado adaptativo",
+            "caption": "Diagrama propio del flujo de renderizado y la alternativa estática.",
+            "alt": "El navegador usa WebGL bajo demanda o conserva el SVG cuando no puede renderizar.",
+            "src": "/media/genyx/graphics-es.svg",
+            "width": 800,
+            "height": 480
+          }
+        ],
+        "summary": "Prototipo corporativo propio con una escultura 3D y arquitectura por capas.",
+        "challenge": "Presentar capacidades de ingeniería mediante una experiencia visual ligera.",
+        "approach": "Separamos contenido, aplicación y presentación. La escena gráfica usa WebGL nativo y una alternativa SVG.",
+        "capabilities": [
+          "Interfaz bilingüe y adaptable.",
+          "Geometría interactiva y movimiento reducido.",
+          "Pruebas automatizadas de código, navegador y cabeceras HTTP."
+        ],
+        "limitations": "Prototipo en desarrollo. No representa un despliegue comercial ni una certificación de calidad."
+      },
+      "en": {
+        "title": "Genyx — Digital experience",
+        "media": [
+          {
+            "id": "architecture",
+            "kind": "image",
+            "title": "Genyx architecture",
+            "caption": "Original diagram of the current layers and their dependencies.",
+            "alt": "Presentation and application depend on the domain; infrastructure implements the port.",
+            "src": "/media/genyx/architecture-en.svg",
+            "width": 800,
+            "height": 480
+          },
+          {
+            "id": "graphics",
+            "kind": "image",
+            "title": "Adaptive rendering",
+            "caption": "Original diagram of the rendering flow and static fallback.",
+            "alt": "The browser uses on-demand WebGL or retains the SVG when rendering is unavailable.",
+            "src": "/media/genyx/graphics-en.svg",
+            "width": 800,
+            "height": 480
+          }
+        ],
+        "summary": "First-party corporate prototype with a 3D sculpture and layered architecture.",
+        "challenge": "Present engineering capabilities through a lightweight visual experience.",
+        "approach": "Content, application and presentation are separated. The graphics use native WebGL and an SVG fallback.",
+        "capabilities": [
+          "Bilingual responsive interface.",
+          "Interactive geometry and reduced-motion support.",
+          "Automated code, browser and HTTP header checks."
+        ],
+        "limitations": "Prototype in development. It does not represent a commercial deployment or quality certification."
+      }
+    }
+  }
+]

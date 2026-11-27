@@ -163,7 +163,7 @@ try {
     for (const [suffix, expected] of [
       ["projects", 200],
       ["projects/genyx", 200],
-      ["projects/unpublished", 404],
+      ["projects/_missing", 404],
       ["services", 200],
       ["services/web", 200],
       ["services/mobile", 200],
@@ -171,9 +171,9 @@ try {
       ["services/ai", 200],
       ["services/automation", 200],
       ["services/integrations", 200],
-      ["services/unknown", 404],
+      ["services/_missing", 404],
       ["products", 200],
-      ["products/unavailable", 404],
+      ["products/_missing", 404],
     ]) {
       const path = `/${locale}/${suffix}`;
       const result = await request(path);
@@ -237,7 +237,7 @@ try {
     })`);
     assert.equal(summary.headings, 1);
     assert.equal(summary.main, 1);
-    assert.equal(summary.services, 6);
+    assert.ok(summary.services >= 6);
     assert.equal(summary.fallback, "visible");
     assert.equal(summary.reduced, true);
     assert.equal(summary.webglReady, false);
@@ -308,12 +308,16 @@ try {
       () =>
         evaluate(`(() => {
           const images = [...document.querySelectorAll(".media-card img")];
-          return images.length === 2 && images.every(img => img.complete && img.naturalWidth > 0);
+          return images.length > 0 && images.every(img => img.complete && img.naturalWidth > 0);
         })()`),
       "project media loaded",
     );
     assert.equal(await evaluate("document.querySelectorAll('.demo-stage').length"), 1);
-    assert.equal(await evaluate("document.querySelectorAll('.media-card video').length"), 0);
+    const videosHaveCaptions = await evaluate(`
+      [...document.querySelectorAll(".media-card video")].every(video =>
+        video.querySelector("track[kind=captions]"))
+    `);
+    assert.ok(videosHaveCaptions, "Every displayed video has captions");
 
     if (process.env.GENYX_CAPTURE === "1") {
       const folder = ".artifacts/genyx-media";

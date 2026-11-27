@@ -52,6 +52,11 @@ Evaluate security advisories promptly and review dependency changes before mergi
 Main branch protection is active. The repository owner must verify remaining security settings.
 See [Sprint 0](docs/sprint-0.md) for the outstanding gates.
 
+## Content management
+
+Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).
+Run `npm run test:content` before submitting a content change.
+
 ## Architecture
 
 See [architecture](docs/architecture.md), [Sprint 0](docs/sprint-0.md), and [security](SECURITY.md).
