@@ -37,7 +37,11 @@ export function FoundationScreen({
           <Brand />
         </Link>
         <div className="header-actions">
-          <Link prefetch={false} href={`/${alternateLocale(locale)}`} lang={alternateLocale(locale)}>
+          <Link
+            prefetch={false}
+            href={`/${alternateLocale(locale)}`}
+            lang={alternateLocale(locale)}
+          >
             {content.language}
           </Link>
           <CinematicMenu menu={content.menu} close={content.close} links={links} />
@@ -120,7 +124,11 @@ export function FoundationScreen({
           <Link prefetch={false} className="action action-secondary" href={`/${locale}/inquiry`}>
             {locale === "es" ? "Preparar proyecto" : "Prepare project"}
           </Link>
-          <Link prefetch={false} className="action action-secondary" href={`/${locale}/consultation`}>
+          <Link
+            prefetch={false}
+            className="action action-secondary"
+            href={`/${locale}/consultation`}
+          >
             {locale === "es" ? "Consultoría de 30 minutos" : "30-minute consultation"}
           </Link>
         </section>
