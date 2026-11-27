@@ -40,7 +40,15 @@ export function parseTestLead(input: unknown): TestLead {
     throw new Error("Expected a synthetic test record");
   }
   const body = input as Record<string, unknown>;
-  const keys = ["schemaVersion", "testOnly", "source", "requestId", "locale", "service", "timeline"];
+  const keys = [
+    "schemaVersion",
+    "testOnly",
+    "source",
+    "requestId",
+    "locale",
+    "service",
+    "timeline",
+  ];
   const service = services.find((item) => item === body.service);
   const timeline = timelines.find((item) => item === body.timeline);
   const id = body.requestId;

@@ -12,6 +12,7 @@ Use the supported Node.js 22.12+ or 24.x. Run:
 
 ```powershell
 npm run check
+npm run test:crm
 npm run crm -- where
 npm run crm -- demo
 npm run crm -- list
@@ -40,7 +41,8 @@ Never insert actual customer data into this laboratory.
 - Administration: local CLI only.
 
 Unit tests cover validation, persistence, duplicate IDs, transitions, history
-and reopened SQLite connections. The n8n test workflow remains unchanged and
+and reopened SQLite connections. A CLI smoke test creates and removes an isolated
+temporary synthetic database, without touching the owner's database. The n8n test workflow remains unchanged and
 does not write to this database. The demo imports the same fixture locally,
 not a live webhook result.
 
