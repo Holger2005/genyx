@@ -9,7 +9,7 @@ export default async function ProjectsPage({ params }: { params: Promise<{ local
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   return (
-    <PortfolioShell locale={locale} path="">
+    <PortfolioShell locale={locale} path="/projects">
       <p className="eyebrow">GENYX / PORTFOLIO</p>
       <h1>{locale === "es" ? "Proyectos seleccionados." : "Selected projects."}</h1>
       <p className="description">

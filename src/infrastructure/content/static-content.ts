@@ -1,5 +1,7 @@
 import type { SiteContent, SiteContentRepository } from "../../application/site-content";
 import type { Locale } from "../../domain/locale";
+import { getServices } from "../../application/catalog/catalog";
+import { staticCatalog } from "../catalog/static-catalog";
 
 const content: Record<Locale, SiteContent> = {
   es: {
@@ -17,29 +19,7 @@ const content: Record<Locale, SiteContent> = {
     home: "Inicio",
     servicesTitle: "Tecnología sin compromisos.",
     servicesIntro: "Seis especialidades. Una misma disciplina: ingeniería orientada a resultados.",
-    services: [
-      {
-        title: "Desarrollo web",
-        description: "Experiencias digitales rápidas, accesibles y seguras.",
-      },
-      {
-        title: "Aplicaciones móviles",
-        description: "Productos intuitivos para las personas que los usan.",
-      },
-      {
-        title: "Software empresarial",
-        description: "Sistemas que organizan y simplifican tu operación.",
-      },
-      {
-        title: "Inteligencia artificial",
-        description: "Soluciones inteligentes con objetivos concretos.",
-      },
-      { title: "Automatización", description: "Menos trabajo repetitivo, más tiempo para crecer." },
-      {
-        title: "APIs e integraciones",
-        description: "Conectamos sistemas y datos de forma controlada.",
-      },
-    ],
+    services: getServices(staticCatalog, "es"),
     workTitle: "Ingeniería aplicada.",
     workDescription: "Explora nuestros casos de estudio y demostraciones técnicas.",
     aboutTitle: "Precisión en cada decisión.",
@@ -63,23 +43,7 @@ const content: Record<Locale, SiteContent> = {
     home: "Home",
     servicesTitle: "Technology without compromise.",
     servicesIntro: "Six specialties. One discipline: engineering for meaningful outcomes.",
-    services: [
-      { title: "Web development", description: "Fast, accessible and secure digital experiences." },
-      {
-        title: "Mobile applications",
-        description: "Intuitive products for the people who use them.",
-      },
-      {
-        title: "Enterprise software",
-        description: "Systems that organize and simplify operations.",
-      },
-      {
-        title: "Artificial intelligence",
-        description: "Intelligent solutions with tangible goals.",
-      },
-      { title: "Automation", description: "Less repetitive work, more time to grow." },
-      { title: "APIs and integrations", description: "Connect systems and data with control." },
-    ],
+    services: getServices(staticCatalog, "en"),
     workTitle: "Engineering in practice.",
     workDescription: "Explore our case studies and technical demonstrations.",
     aboutTitle: "Precision in every decision.",
