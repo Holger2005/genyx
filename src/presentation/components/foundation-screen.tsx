@@ -120,6 +120,9 @@ export function FoundationScreen({
           <Link className="action action-secondary" href={`/${locale}/inquiry`}>
             {locale === "es" ? "Preparar proyecto" : "Prepare project"}
           </Link>
+          <Link className="action action-secondary" href={`/${locale}/consultation`}>
+            {locale === "es" ? "Consultoría de 30 minutos" : "30-minute consultation"}
+          </Link>
         </section>
       </main>
       <footer className="footer">

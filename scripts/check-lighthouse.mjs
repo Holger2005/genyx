@@ -11,6 +11,8 @@ const audits = [
   ["case-mobile", "/projects/genyx", "mobile"],
   ["services-mobile", "/services", "mobile"],
   ["products-mobile", "/products", "mobile"],
+  ["inquiry-mobile", "/inquiry", "mobile"],
+  ["consultation-mobile", "/consultation", "mobile"],
 ];
 let failures = 0;
 

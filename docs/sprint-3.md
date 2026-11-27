@@ -11,6 +11,18 @@ browser storage, personal contact data collection, email delivery or lead databa
 The interface explicitly states these limitations. Users are advised not to enter
 personal data or secrets. Service options come from the existing catalog.
 
+## Iteration 3.2 — Initial consultation
+
+The bilingual consultation page describes a proposed free 30-minute discovery
+session. Its suggested agenda allocates five minutes to discovery, fifteen to
+requirements and ten to next steps. No booking provider or availability is
+configured; the page explicitly states that reservations are not enabled.
+The preparation link opens the existing local inquiry draft.
+
+Mobile Lighthouse checks now include inquiry and consultation routes in both
+languages, with unchanged release budgets. The agenda is illustrative and can
+be revised before commercial launch.
+
 ## Next gates
 
 - Confirm CI, CodeQL and the release 0.3.0 quality gates before integration.
