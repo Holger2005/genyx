@@ -1,5 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { morphAmount, renderSize, ringGeometry } from "../../src/presentation/graphics/sculpture-geometry";
+import {
+  morphAmount,
+  renderSize,
+  ringGeometry,
+} from "../../src/presentation/graphics/sculpture-geometry";
 
 describe("sculpture geometry", () => {
   it("creates two triangles per ring segment and side with finite coordinates", () => {
