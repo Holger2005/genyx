@@ -23,6 +23,18 @@ only when intentionally changing dependencies and review the resulting lockfile 
 Do not ignore audit errors. Run `npm run format` before committing changes.
 `npm run test:foundation` and `npm run architecture` run without third-party packages.
 
+## Browser smoke checks
+
+Install Chrome or Chromium and use Node.js 24. Run:
+
+```bash
+npm run build
+npm run test:browser
+```
+
+Set `CHROME_PATH` to the browser executable if necessary. The smoke test uses port 3190
+and checks the compiled site, not the development server. CI runs it on Node.js 24.
+
 ## GitHub workflow
 
 - `main`: stable baseline; changes must be reviewed through pull requests.
