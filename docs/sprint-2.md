@@ -51,6 +51,17 @@ commercial scope, not evidence of prior client work or guaranteed outcomes.
 See [content management](content-management.md). This is a file-based editorial
 workflow, not a deployed administrative panel. Public repository data is never private.
 
+## Iteration 2.6
+
+- Version 0.3.0 release candidate with synchronized package metadata.
+- Localized title and description metadata for the homepage, catalogs and detail pages.
+- Preserve noindex and nofollow until commercial publication is approved.
+- Lighthouse mobile audits for five routes in both languages and desktop homepage audits.
+- Downloadable laboratory reports and enforced performance and accessibility budgets.
+
+See [release evidence and gates](releases/v0.3.0.md). A successful lab audit is
+not proof of WCAG compliance or real-user Core Web Vitals.
+
 ## Acceptance gates
 
 - Verify CI, browser smoke tests and CodeQL on the new pull request.

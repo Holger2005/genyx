@@ -5,6 +5,18 @@ import { staticCatalog } from "../../../infrastructure/catalog/static-catalog";
 import { OfferingGrid } from "../../../presentation/catalog/offering-grid";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  return {
+    title: locale === "es" ? "Productos SaaS" : "SaaS products",
+    description:
+      locale === "es"
+        ? "Consulta los productos con disponibilidad comercial confirmada."
+        : "Browse products with confirmed commercial availability.",
+  };
+}
+
 export default async function CatalogPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();

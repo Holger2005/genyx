@@ -16,6 +16,18 @@ export function generateStaticParams({ params }: { params: { locale: string } })
   }));
 }
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string; slug: string }>;
+}) {
+  const { locale, slug } = await params;
+  if (!isLocale(locale)) notFound();
+  const item = getProjectDetail(staticProjectRepository, locale, slug);
+  if (!item) notFound();
+  return { title: item.title, description: item.summary };
+}
+
 export default async function ProjectPage({
   params,
 }: {

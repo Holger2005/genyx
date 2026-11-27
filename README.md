@@ -1,7 +1,7 @@
-# GENYX · v0.2.0
+# GENYX · v0.3.0
 
-Bilingual Genyx corporate platform — Sprint 1 visual prototype.
-Includes an interactive WebGL sculpture, accessible modal navigation and a six-service overview.
+Bilingual Genyx corporate platform — Sprint 2 portfolio and catalog prototype.
+Includes WebGL, case studies, a service catalog, SaaS visibility controls and Git-backed content.
 No production deployment or external services configured. All rights reserved.
 
 ## Start locally (Windows / macOS / Linux)
@@ -52,6 +52,12 @@ Evaluate security advisories promptly and review dependency changes before mergi
 Main branch protection is active. The repository owner must verify remaining security settings.
 See [Sprint 0](docs/sprint-0.md) for the outstanding gates.
 
+## Lighthouse audits
+
+The Node.js 24 CI job runs the pinned Lighthouse CLI against the production build.
+Reports are uploaded for review, including failed audit runs. See the
+[release checklist](docs/releases/v0.3.0.md) for thresholds and limitations.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).
@@ -61,4 +67,5 @@ Run `npm run test:content` before submitting a content change.
 
 See [architecture](docs/architecture.md), [Sprint 0](docs/sprint-0.md), and [security](SECURITY.md).
 See [Sprint 1](docs/sprint-1.md) and the [release checklist](docs/releases/v0.2.0.md).
-The visual prototype is not a production-ready commercial site.
+See [Sprint 2](docs/sprint-2.md) and the [v0.3.0 release checklist](docs/releases/v0.3.0.md).
+The portfolio prototype is not a production-ready commercial site.

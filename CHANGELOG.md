@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 — Sprint 2 portfolio and catalog
+
+- Bilingual portfolio, first-party case study, technical gallery and live WebGL demonstration.
+- Six service detail pages and availability-gated SaaS catalog.
+- Git-backed bilingual content with typed validation and media checks.
+- Localized page metadata, production browser checks and Lighthouse release gates.
+- No external CMS, client inquiry form or commercial deployment.
+
 ## 0.2.0 — Sprint 1 visual prototype
 
 - Bilingual responsive corporate homepage, six service cards and native modal navigation.

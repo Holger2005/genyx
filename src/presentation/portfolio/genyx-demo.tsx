@@ -8,11 +8,11 @@ export function GenyxDemo({ locale }: { locale: Locale }) {
       <h2 id="demo-title">{es ? "Demostración en vivo" : "Live demonstration"}</h2>
       <p className="description">
         {es
-          ? "Explora la escultura del prototipo. El cursor y el desplazamiento modifican la geometría. Con movimiento reducido se muestra la alternativa SVG."
-          : "Explore the prototype sculpture. Pointer movement and scrolling change the geometry. Reduced motion preserves the SVG fallback."}
+          ? "Explora la escultura del prototipo. En pantallas pequeñas, activa la vista 3D. Si no está disponible o prefieres movimiento reducido, se conserva el SVG."
+          : "Explore the prototype sculpture. On smaller screens, enable the 3D view. If unavailable or reduced motion is preferred, the SVG remains visible."}
       </p>
       <div className="demo-stage">
-        <SculpturePreview />
+        <SculpturePreview locale={locale} />
       </div>
     </section>
   );
