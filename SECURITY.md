@@ -5,10 +5,16 @@ Do not disclose credentials, customer data or vulnerability details in public is
 Use GitHub private vulnerability reporting when enabled; otherwise contact the repository owner privately.
 Never commit secrets. Rotate compromised credentials immediately; deleting a file does not erase Git history.
 
+## Repository controls
+
+- Activate branch protection on `main`, require pull requests and passing CI checks.
+- Verify secret scanning, push protection, Dependabot alerts and private vulnerability reporting.
+- Review dependency changes and coordinate major migrations; do not use forced npm resolutions.
+- Keep GitHub Actions pinned to reviewed full commit SHAs and evaluate updates through pull requests.
+- Use least-privilege workflow permissions, no persisted checkout credentials and no secrets in untrusted PR workflows.
+
 ## Before production
 
-- Enable private vulnerability reporting, secret scanning and push protection where available.
-- Require CI checks and review for changes to `main` when collaborators are available.
 - Verify CSP, HTTPS/HSTS, dependency audit, backups, incident response and applicable privacy requirements.
 - Establish authenticated server-to-server webhooks before integrating n8n.
 - Review applicable OWASP ASVS level 2 controls; no certification is claimed.
