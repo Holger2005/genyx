@@ -8,7 +8,10 @@ import { recordTestLead } from "../../src/application/crm/lead-repository.ts";
 import { SqliteLeadRepository } from "../../src/infrastructure/crm/sqlite-lead-repository.ts";
 
 const fixture = JSON.parse(
-  await readFile(new URL("../../automation/n8n/fixtures/intake-test.json", import.meta.url), "utf8"),
+  await readFile(
+    new URL("../../automation/n8n/fixtures/intake-test.json", import.meta.url),
+    "utf8",
+  ),
 );
 
 test("local dashboard enforces login, CSRF, state changes, logout and session expiry", async () => {
@@ -35,9 +38,11 @@ test("local dashboard enforces login, CSRF, state changes, logout and session ex
     const initial = await fetch(origin);
     assert.match(await initial.text(), /Acceso privado/);
     assert.equal(initial.headers.get("cache-control"), "no-store");
+    assert.equal(initial.headers.get("referrer-policy"), "same-origin");
     assert.match(initial.headers.get("content-security-policy"), /frame-ancestors 'none'/);
     assert.equal((await post("/move", {})).status, 401);
     assert.equal((await post("/login", { token }, "", "http://example.invalid")).status, 403);
+    assert.equal((await post("/login", { token }, "", "null")).status, 403);
     assert.equal((await post("/login", { token: "wrong" })).status, 401);
 
     const login = await post("/login", { token });
