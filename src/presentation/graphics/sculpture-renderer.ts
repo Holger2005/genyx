@@ -34,18 +34,20 @@ const fragmentSource = `
 precision mediump float;
 varying vec3 vNormal;
 uniform float uGlass;
+uniform vec2 uLight;
 
 void main() {
   vec3 n = normalize(vNormal);
-  vec3 light = normalize(vec3(-0.5, 0.8, 0.7));
+  vec3 light = normalize(vec3(-0.5 + uLight.x*0.55, 0.8 - uLight.y*0.45, 0.7));
+  float fill = max(dot(n, normalize(vec3(0.7,-0.3,0.5))),0.0);
   float diffuse = max(dot(n, light), 0.0);
   float reflection = abs(n.x*0.7+n.y*0.3);
   float edge = pow(1.0-abs(n.z), 3.0);
   float band = pow(0.5+0.5*cos(reflection*17.0), 5.0);
   float specular = pow(max(dot(n, normalize(light+vec3(0.0,0.0,1.0))),0.0),24.0);
   float rim = pow(1.0-abs(n.z), 2.0);
-  float metal = 0.11 + diffuse*0.38 + band*0.30 + specular*0.45 + edge*0.12;
-  float crystal = 0.26 + diffuse*0.20 + rim*0.45 + specular*0.5;
+  float metal = 0.09 + diffuse*0.38 + band*0.30 + specular*0.45 + edge*0.12 + fill*0.10;
+  float crystal = 0.22 + diffuse*0.20 + rim*0.45 + specular*0.5 + fill*0.10;
   float value = clamp(mix(metal, crystal, uGlass), 0.0, 1.0);
   gl_FragColor = vec4(vec3(value), mix(1.0, 0.32+rim*0.5, uGlass));
 }
@@ -108,6 +110,7 @@ export function createSculptureRenderer(canvas: HTMLCanvasElement) {
   const scale = gl.getUniformLocation(program, "uScale");
   const glass = gl.getUniformLocation(program, "uGlass");
   const morph = gl.getUniformLocation(program, "uMorph");
+  const light = gl.getUniformLocation(program, "uLight");
   const mesh = ringGeometry(24, 8, 1, 0.16);
 
   gl.useProgram(program);
@@ -129,6 +132,7 @@ export function createSculptureRenderer(canvas: HTMLCanvasElement) {
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.uniform1f(aspect, size.width / size.height);
     const deformation = morphAmount(scroll);
+    gl.uniform2f(light, x, y);
     gl.disable(gl.BLEND);
     gl.depthMask(true);
 

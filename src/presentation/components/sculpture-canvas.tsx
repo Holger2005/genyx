@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { normalizedPointer } from "../graphics/ambient-motion";
 import { createSculptureRenderer } from "../graphics/sculpture-renderer";
 
 export function SculptureCanvas() {
@@ -46,8 +47,8 @@ export function SculptureCanvas() {
     function pointer(event: PointerEvent) {
       if (!host || event.pointerType === "touch") return;
       const rect = host.getBoundingClientRect();
-      x = ((event.clientX - rect.left) / Math.max(rect.width, 1) - 0.5) * 2;
-      y = ((event.clientY - rect.top) / Math.max(rect.height, 1) - 0.5) * 2;
+      x = normalizedPointer(event.clientX, rect.left, rect.width);
+      y = normalizedPointer(event.clientY, rect.top, rect.height);
       schedule();
     }
 
