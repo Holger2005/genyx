@@ -18,6 +18,7 @@ describe("commercial catalog", () => {
 
   it("does not expose draft or review products", () => {
     const sample = staticCatalog.services()[0];
+    if (!sample) throw new Error("Expected at least one service for the catalog fixture");
     const repository: CatalogRepository = {
       services: () => [],
       products: () => [
