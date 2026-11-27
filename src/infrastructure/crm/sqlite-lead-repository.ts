@@ -76,10 +76,12 @@ export class SqliteLeadRepository implements LeadRepository {
         return previous;
       }
       this.db
-        .prepare(`
+        .prepare(
+          `
           INSERT INTO leads (id, locale, service, timeline, priority, stage, created_at, updated_at)
           VALUES (?, ?, ?, ?, ?, 'new', ?, ?)
-        `)
+        `,
+        )
         .run(lead.id, lead.locale, lead.service, lead.timeline, lead.priority, now, now);
       this.event(lead.id, "new", now);
       return { ...lead, stage: "new", createdAt: now, updatedAt: now };
