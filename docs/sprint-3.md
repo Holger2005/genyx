@@ -84,9 +84,17 @@ The existing n8n workflow remains unchanged. A bilingual prototype privacy notic
 describes current behavior; it is not a final legal policy. No public admin route,
 real intake, or production authentication is enabled. See [security gates](commercial-security.md).
 
+## Iteration 3.8 — Release v0.4.0 candidate
+
+The candidate consolidates the portfolio and commercial integration laboratory,
+updates release metadata and audits privacy pages in both languages. Automated
+HTTP checks ensure no public CRM, admin or lead intake route has been introduced.
+See the [v0.4.0 release checklist](releases/v0.4.0.md) for evidence and remaining
+manual acceptance gates. Version promotion requires fresh CI and CodeQL checks.
+
 ## Next gates
 
-- Confirm CI, CodeQL and the release 0.3.0 quality gates before integration.
+- Confirm CI, CodeQL and the v0.4.0 quality gates before integration.
 - Test keyboard access, mobile layout and validation feedback.
 - Define a secure server-side intake contract, consent and privacy notice before
   collecting contact information.

@@ -1,8 +1,8 @@
 {
   "name": "genyx",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
-  "description": "Genyx corporate platform — Sprint 2 portfolio and catalog",
+  "description": "Genyx corporate platform — Sprint 3 commercial integration laboratory",
   "engines": {
     "node": ">=22.12.0 <23 || >=24.0.0 <25"
   },

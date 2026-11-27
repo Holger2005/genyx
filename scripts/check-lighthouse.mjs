@@ -13,6 +13,7 @@ const audits = [
   ["products-mobile", "/products", "mobile"],
   ["inquiry-mobile", "/inquiry", "mobile"],
   ["consultation-mobile", "/consultation", "mobile"],
+  ["privacy-mobile", "/privacy", "mobile"],
 ];
 let failures = 0;
 
