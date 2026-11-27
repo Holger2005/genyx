@@ -358,7 +358,8 @@ try {
     () => evaluate('document.querySelector(".sculpture-activation").offsetWidth > 0'),
     "mobile 3D control visible",
   );
-  const mobileReady = await evaluate("!!document.querySelector('.sculpture-canvas[data-ready=true]')");
+  const readySelector = ".sculpture-canvas[data-ready=true]";
+  const mobileReady = await evaluate(`!!document.querySelector("${readySelector}")`);
   assert.equal(mobileReady, false);
   const activation = 'document.querySelector(".sculpture-activation")';
   await waitFor(async () => {
