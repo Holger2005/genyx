@@ -192,7 +192,13 @@ try {
         expected,
         `Unexpected HTTP status for ${path}; run npm run build`,
       );
-      if (expected === 200) checkMetadata(await result.text());
+      if (expected === 200) {
+        const page = await result.text();
+        checkMetadata(page);
+        if (suffix === "consultation") {
+          assert.ok(page.includes("America/Guayaquil"), "Consultation reference time zone");
+        }
+      }
     }
   }
   console.log("HTTP, locale and security header checks passed");

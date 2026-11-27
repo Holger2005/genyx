@@ -58,6 +58,11 @@ The Node.js 24 CI job runs the pinned Lighthouse CLI against the production buil
 Reports are uploaded for review, including failed audit runs. See the
 [release checklist](docs/releases/v0.3.0.md) for thresholds and limitations.
 
+## Appointment scheduling
+
+See [Google Calendar setup](docs/google-calendar.md) for the optional booking link.
+Reservations remain disabled without an approved configuration.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

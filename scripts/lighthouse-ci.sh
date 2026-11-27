@@ -32,7 +32,9 @@ audit() {
 }
 
 for locale in es en; do
-  audit "$locale-home-mobile" "$locale"
+  for sample in 1 2 3; do
+    audit "$locale-home-mobile-$sample" "$locale"
+  done
   audit "$locale-home-desktop" "$locale" --preset=desktop
   audit "$locale-projects-mobile" "$locale/projects"
   audit "$locale-case-mobile" "$locale/projects/genyx"
