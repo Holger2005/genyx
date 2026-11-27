@@ -21,6 +21,8 @@
     "test:browser": "node scripts/browser-smoke.mjs",
     "test:n8n": "node scripts/n8n-smoke.mjs",
     "test:crm": "node scripts/crm-smoke.mjs",
+    "admin": "node --experimental-sqlite --experimental-strip-types --disable-warning=ExperimentalWarning scripts/admin-start.mjs",
+    "test:admin": "node --experimental-sqlite --experimental-strip-types --test tests/foundation/admin-server.test.mjs",
     "test:bridge": "node --experimental-strip-types --test tests/foundation/n8n-crm-bridge.test.mjs",
     "crm:sync": "node --experimental-sqlite --experimental-strip-types --disable-warning=ExperimentalWarning scripts/crm-sync.mjs",
     "crm": "node --experimental-sqlite --experimental-strip-types --disable-warning=ExperimentalWarning scripts/crm.mjs",

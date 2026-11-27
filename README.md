@@ -88,6 +88,11 @@ See [deployment architecture](docs/production-architecture.md) for the proposed
 public static deployment, private administration boundary and hosting decisions.
 Run `npm run test:boundary` to test the source-level isolation guard.
 
+## Local administrative dashboard
+
+See [local admin setup](docs/admin.md) for the authenticated synthetic CRM dashboard.
+It is a separate loopback-only process, never a public Next.js route.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

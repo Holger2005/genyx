@@ -11,6 +11,14 @@ checks and exercised in CI.
 See [production architecture](production-architecture.md) for the provider
 assessment, source links, trust boundaries, and static-export acceptance gates.
 
+## 4.2 — Local authenticated dashboard
+
+A separate loopback-only Node HTTP process exposes a server-rendered administrative
+dashboard for synthetic CRM records. A randomly generated local token opens a
+30-minute in-memory session. Login attempts are limited, mutating requests
+require the same origin and CSRF token, and logout revokes the session.
+The public application remains unchanged. See [admin setup](admin.md).
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.
