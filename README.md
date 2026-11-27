@@ -63,6 +63,10 @@ Reports are uploaded for review, including failed audit runs. See the
 See [Google Calendar setup](docs/google-calendar.md) for the optional booking link.
 Reservations remain disabled without an approved configuration.
 
+## WhatsApp contact
+
+See [WhatsApp setup](docs/whatsapp.md) for the optional business number.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

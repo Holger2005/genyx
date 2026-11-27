@@ -2,7 +2,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { bookingTimeZone, getBookingUrl } from "../../../config/booking";
 import { consultation } from "../../../domain/consultation/consultation";
+import { getWhatsAppNumber } from "../../../config/whatsapp";
 import { isLocale } from "../../../domain/locale";
+import { WhatsAppAction } from "../../../presentation/contact/whatsapp-action";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
 
 const copy = {
@@ -98,6 +100,10 @@ export default async function ConsultationPage({
         <Link className="action action-secondary" href={`/${locale}/inquiry`}>
           {text.prepare}
         </Link>
+        <WhatsAppAction
+          locale={locale}
+          number={getWhatsAppNumber(process.env.GENYX_WHATSAPP_NUMBER)}
+        />
       </section>
     </PortfolioShell>
   );

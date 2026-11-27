@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { SiteContent } from "../../application/site-content";
 import { alternateLocale, type Locale } from "../../domain/locale";
 import type { PublishedProject } from "../../domain/portfolio/project";
+import { WhatsAppAction } from "../contact/whatsapp-action";
 import { ProjectGrid } from "../portfolio/project-grid";
 import { AmbientEnvironment } from "./ambient-environment";
 import { Brand } from "./brand";
@@ -12,10 +13,12 @@ export function FoundationScreen({
   locale,
   content,
   projects,
+  whatsappNumber,
 }: {
   locale: Locale;
   content: SiteContent;
   projects: readonly PublishedProject[];
+  whatsappNumber: string | null;
 }) {
   const links = [
     { href: "#home", label: content.home },
@@ -131,6 +134,7 @@ export function FoundationScreen({
           >
             {locale === "es" ? "Consultoría de 30 minutos" : "30-minute consultation"}
           </Link>
+          <WhatsAppAction locale={locale} number={whatsappNumber} />
         </section>
       </main>
       <footer className="footer">
