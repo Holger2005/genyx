@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getServices } from "../../../application/catalog/catalog";
 import { isLocale } from "../../../domain/locale";
@@ -32,6 +33,9 @@ export default async function InquiryPage({ params }: { params: Promise<{ locale
           : "Define your requirements and create a summary before a consultation."}
       </p>
       <InquiryForm locale={locale} services={services} />
+      <Link className="action action-secondary" href={`/${locale}/consultation`}>
+        {locale === "es" ? "Conocer la consultoría inicial" : "Explore the initial consultation"}
+      </Link>
     </PortfolioShell>
   );
 }
