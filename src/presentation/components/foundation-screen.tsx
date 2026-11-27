@@ -1,12 +1,22 @@
 import Link from "next/link";
 import type { SiteContent } from "../../application/site-content";
 import { alternateLocale, type Locale } from "../../domain/locale";
+import type { PublishedProject } from "../../domain/portfolio/project";
+import { ProjectGrid } from "../portfolio/project-grid";
 import { AmbientEnvironment } from "./ambient-environment";
 import { Brand } from "./brand";
 import { CinematicMenu } from "./cinematic-menu";
 import { SculpturePreview } from "./sculpture-preview";
 
-export function FoundationScreen({ locale, content }: { locale: Locale; content: SiteContent }) {
+export function FoundationScreen({
+  locale,
+  content,
+  projects,
+}: {
+  locale: Locale;
+  content: SiteContent;
+  projects: readonly PublishedProject[];
+}) {
   const links = [
     { href: "#home", label: content.home },
     { href: "#services", label: content.explore },
@@ -73,6 +83,10 @@ export function FoundationScreen({ locale, content }: { locale: Locale; content:
           <p className="eyebrow">02 / SELECTED WORK</p>
           <h2 id="work-title">{content.workTitle}</h2>
           <p className="description">{content.workDescription}</p>
+          <ProjectGrid locale={locale} projects={projects} />
+          <Link className="action action-secondary" href={`/${locale}/projects`}>
+            {locale === "es" ? "Ver portafolio" : "View portfolio"}
+          </Link>
         </section>
         <section id="about" className="section" tabIndex={-1} aria-labelledby="about-title">
           <p className="eyebrow">03 / GENYX</p>

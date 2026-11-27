@@ -41,7 +41,7 @@ const content: Record<Locale, SiteContent> = {
       },
     ],
     workTitle: "Ingeniería aplicada.",
-    workDescription: "Nuestro portafolio audiovisual estará disponible en una próxima versión.",
+    workDescription: "Explora nuestros casos de estudio y demostraciones técnicas.",
     aboutTitle: "Precisión en cada decisión.",
     aboutDescription:
       "Construimos tecnología con una visión clara: calidad, seguridad y evolución sostenible.",
@@ -81,7 +81,7 @@ const content: Record<Locale, SiteContent> = {
       { title: "APIs and integrations", description: "Connect systems and data with control." },
     ],
     workTitle: "Engineering in practice.",
-    workDescription: "Our multimedia portfolio will be available in an upcoming release.",
+    workDescription: "Explore our case studies and technical demonstrations.",
     aboutTitle: "Precision in every decision.",
     aboutDescription:
       "We build technology with a clear vision: quality, security and sustainable evolution.",

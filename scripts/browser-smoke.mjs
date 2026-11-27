@@ -160,6 +160,9 @@ try {
       assert.ok(csp.includes(directive), directive);
     }
     assert.match(await response.text(), new RegExp(`<html lang="${locale}"`));
+    assert.equal((await request(`/${locale}/projects`)).status, 200);
+    assert.equal((await request(`/${locale}/projects/genyx`)).status, 200);
+    assert.equal((await request(`/${locale}/projects/unpublished`)).status, 404);
   }
   console.log("HTTP, locale and security header checks passed");
 
