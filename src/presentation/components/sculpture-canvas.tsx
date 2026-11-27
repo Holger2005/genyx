@@ -11,6 +11,9 @@ export function SculptureCanvas() {
     const canvas = ref.current;
     const host = canvas?.parentElement;
     if (!canvas || !host) return;
+    if (typeof IntersectionObserver === "undefined" || typeof ResizeObserver === "undefined") {
+      return;
+    }
 
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let renderer: ReturnType<typeof createSculptureRenderer> = null;
@@ -36,6 +39,7 @@ export function SculptureCanvas() {
       const rect = host.getBoundingClientRect();
       const progress = Math.max(-1, Math.min(1, -rect.top / Math.max(window.innerHeight, 1)));
       if (renderer.draw(x, y, progress * 0.8)) canvas.dataset.ready = "true";
+      else hide();
     }
 
     function schedule() {
