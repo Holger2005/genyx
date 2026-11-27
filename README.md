@@ -93,6 +93,11 @@ Run `npm run test:boundary` to test the source-level isolation guard.
 See [local admin setup](docs/admin.md) for the authenticated synthetic CRM dashboard.
 It is a separate loopback-only process, never a public Next.js route.
 
+## PostgreSQL foundation
+
+See [PostgreSQL setup](docs/postgres.md) for the synthetic-only migration and
+isolated Docker checks. The local dashboard still uses SQLite.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).
