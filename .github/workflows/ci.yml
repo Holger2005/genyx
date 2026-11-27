@@ -43,6 +43,9 @@ jobs:
       - name: Quality checks
         run: npm run check
 
+      - name: Local CRM CLI smoke check
+        run: npm run test:crm
+
       - name: Browser and HTTP smoke checks
         if: ${{ matrix.node-version == 24 }}
         env:
