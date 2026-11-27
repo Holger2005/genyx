@@ -71,6 +71,11 @@ See [WhatsApp setup](docs/whatsapp.md) for the optional business number.
 
 See [n8n setup](docs/n8n.md) for the optional local synthetic intake workflow.
 
+## CRM laboratory
+
+Use `npm run crm -- demo` to create a local synthetic opportunity. See
+[CRM setup](docs/crm.md) for the available commands and safety limitations.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

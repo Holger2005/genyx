@@ -62,6 +62,17 @@ Node-based tests execute the exported classifier; an explicit local smoke comman
 tests the real n8n instance after the owner imports and configures it. See
 [n8n setup](n8n.md). Runtime import and webhook verification remain manual gates.
 
+## Iteration 3.6 — Local CRM laboratory
+
+A Node.js SQLite adapter stores synthetic leads outside the repository and
+records stage changes in a transactional event history. The application
+enforces sequential transitions, closed terminal states and idempotent
+creation. The local CLI can seed the existing n8n fixture, list records,
+advance stages and inspect history. No public admin route, real customer
+fields, automatic webhook persistence or network submission is enabled.
+See [CRM laboratory](crm.md). SQLite is built into the supported Node versions;
+the CLI uses type stripping and the experimental SQLite flag for Node 22.
+
 ## Next gates
 
 - Confirm CI, CodeQL and the release 0.3.0 quality gates before integration.
