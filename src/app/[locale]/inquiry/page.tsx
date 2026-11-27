@@ -35,6 +35,9 @@ export default async function InquiryPage({ params }: { params: Promise<{ locale
           : "Define your requirements and create a summary before a consultation."}
       </p>
       <InquiryForm locale={locale} services={services} />
+      <Link href={`/${locale}/privacy`}>
+        {locale === "es" ? "Aviso de privacidad del prototipo" : "Prototype privacy notice"}
+      </Link>
       <Link className="action action-secondary" href={`/${locale}/consultation`}>
         {locale === "es" ? "Conocer la consultoría inicial" : "Explore the initial consultation"}
       </Link>

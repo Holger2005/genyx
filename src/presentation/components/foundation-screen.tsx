@@ -146,6 +146,9 @@ export function FoundationScreen({
             </a>
           ))}
         </nav>
+        <Link prefetch={false} href={`/${locale}/privacy`}>
+          {locale === "es" ? "Privacidad" : "Privacy"}
+        </Link>
         <p>{content.status}</p>
         <p>GENYX © 2026</p>
       </footer>
