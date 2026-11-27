@@ -20,7 +20,7 @@ of the selected domain/application code, not of the entire platform.
 The dependency audit reported no vulnerabilities at that time. These results do
 not establish that the application is free of vulnerabilities.
 
-## Maintenance changes (pending acceptance)
+## Maintenance changes (merged)
 
 - Group compatible Vitest updates and defer selected major migrations.
 - Pin workflow actions to full commit SHAs observed in the successful baseline runs.
@@ -29,11 +29,11 @@ not establish that the application is free of vulnerabilities.
 
 ## Closure gates
 
-- [ ] Verify CI and CodeQL on the maintenance pull request and merge only after successful checks.
-- [ ] Activate the branch ruleset targeting the default branch; verify effective main protection.
+- [x] Verify CI and CodeQL on the maintenance pull request and merge only after successful checks ([PR #8](https://github.com/Holger2005/genyx/pull/8)).
+- [x] Activate the branch ruleset targeting the default branch; verify effective main protection ([ruleset](https://github.com/Holger2005/genyx/rules/28204206)).
 - [ ] Verify Dependabot alerts/security updates, secret scanning, push protection and private vulnerability reporting in repository settings.
 - [ ] Review or defer incompatible open Dependabot pull requests; do not merge failing updates.
-- [ ] Synchronize the development branches with the accepted baseline.
+- [x] Development branches incorporate the accepted maintenance changes (equivalent tree after rebase).
 
 Sprint 0 is not administratively closed until these gates are verified.
 
