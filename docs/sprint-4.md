@@ -65,6 +65,13 @@ CLI accepts explicit inputs and stores nothing. No messages are sent, no
 prospects are imported and no actual prices or revenue are claimed.
 See [sales playbook](sales-playbook.md).
 
+## 4.9 — Launch candidate
+
+Version 1.0.0-rc.1 consolidates the sprint and adds local HTTP acceptance
+checks for the audited static export and a SHA-256 manifest outside the public
+artifact. See [release gates](releases/v1.0.0-rc.1.md).
+No stable 1.0.0 release, tag, hosted deployment or commercial approval is implied.
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.

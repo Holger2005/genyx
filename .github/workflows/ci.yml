@@ -107,6 +107,29 @@ jobs:
         if: ${{ matrix.node-version == 24 }}
         run: npm run build:static
 
+      - name: Static release HTTP checks and manifest
+        if: ${{ matrix.node-version == 24 }}
+        run: npm run test:static
+
+      - name: Upload audited static preview
+        if: ${{ matrix.node-version == 24 }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genyx-static-preview
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload static preview manifest
+        if: ${{ matrix.node-version == 24 }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genyx-static-manifest
+          path: .artifacts/static-manifest.json
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Security audit
         if: ${{ !cancelled() && steps.install.outcome == 'success' }}
         run: npm run audit:security

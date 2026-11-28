@@ -1,8 +1,8 @@
 {
   "name": "genyx",
-  "version": "0.4.0",
+  "version": "1.0.0-rc.1",
   "private": true,
-  "description": "Genyx corporate platform — Sprint 3 commercial integration laboratory",
+  "description": "Genyx corporate platform — Sprint 4 launch candidate",
   "engines": {
     "node": ">=22.12.0 <23 || >=24.0.0 <25"
   },
@@ -10,6 +10,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:static": "node scripts/build-static.mjs",
+    "test:static": "node scripts/static-release-smoke.mjs",
     "preview:static": "node scripts/preview-static.mjs",
     "start": "next start",
     "lint": "eslint . --max-warnings=0",

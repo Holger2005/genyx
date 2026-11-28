@@ -1,6 +1,6 @@
-# GENYX · v0.4.0
+# GENYX · v1.0.0-rc.1
 
-Bilingual Genyx corporate platform — Sprint 3 commercial integration laboratory.
+Bilingual Genyx corporate platform — Sprint 4 launch candidate.
 Includes the portfolio, project questionnaire, consultation page, optional Calendar and WhatsApp
 links, and local synthetic n8n/CRM tooling. No production deployment or real intake is enabled.
 All rights reserved.
@@ -104,7 +104,8 @@ synthetic integration test. The local dashboard still uses SQLite.
 ## Static preview
 
 Run `npm run build:static` and `npm run preview:static` for the isolated public
-site candidate. See [deployment setup](docs/deployment.md). Rebuild with
+site candidate. Run `npm run test:static` after the static build for local HTTP
+checks and a SHA-256 artifact manifest. See [deployment setup](docs/deployment.md). Rebuild with
 `npm run build` before running the normal Next.js server.
 
 ## SEO and performance
@@ -129,4 +130,5 @@ See [architecture](docs/architecture.md), [Sprint 0](docs/sprint-0.md), and [sec
 See [Sprint 1](docs/sprint-1.md) and the [release checklist](docs/releases/v0.2.0.md).
 See [Sprint 2](docs/sprint-2.md) and the [v0.3.0 release checklist](docs/releases/v0.3.0.md).
 See [Sprint 3](docs/sprint-3.md) and the [v0.4.0 release checklist](docs/releases/v0.4.0.md).
-The prototype is not a production-ready commercial site.
+See [v1.0.0-rc.1 release gates](docs/releases/v1.0.0-rc.1.md).
+The candidate is not an approved commercial launch.

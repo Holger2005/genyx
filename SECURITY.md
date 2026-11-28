@@ -1,6 +1,6 @@
 # Security policy
 
-Genyx v0.4 is a commercial integration laboratory, not a production-ready service.
+Genyx v1.0.0-rc.1 is a launch candidate, not an approved production service.
 Do not disclose credentials, customer data or vulnerability details in public issues.
 Use GitHub private vulnerability reporting when enabled; otherwise contact the repository owner privately.
 Never commit secrets. Rotate compromised credentials immediately; deleting a file does not erase Git history.
