@@ -112,6 +112,12 @@ site candidate. See [deployment setup](docs/deployment.md). Rebuild with
 See [SEO readiness](docs/seo.md) for preview metadata, static asset budgets
 and the remaining launch gates. Run `npm run test:seo` for regression tests.
 
+## Commercial readiness
+
+See [sales playbook](docs/sales-playbook.md) and the [proposal template](docs/sales-proposal-template.md).
+Run `npm run test:sales` for the internal estimate calculator checks. No customer
+records or approved prices belong in the public repository.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).
