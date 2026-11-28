@@ -80,6 +80,8 @@ Use `npm run crm -- demo` to create a local synthetic opportunity. See
 ## Security and privacy laboratory
 
 See [commercial security gates](docs/commercial-security.md) for the local n8n-to-CRM bridge.
+Run `npm run security:check` and `npm run test:security` for the tracked-file security gate.
+See [security and privacy readiness](docs/security-privacy.md) for the launch checklist.
 Real customer intake remains disabled.
 
 ## Production architecture

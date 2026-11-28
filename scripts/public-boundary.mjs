@@ -20,7 +20,7 @@ const approvedPages = new Set([
 const privatePath = /^src\/(domain|application|infrastructure)\/crm\//;
 const sourceFile = /\.[cm]?[jt]sx?$/;
 const sensitiveConfig =
-  /\b(?:GENYX_N8N_TEST_TOKEN|GENYX_ADMIN_TOKEN|NEXT_PUBLIC_[A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE_KEY))\b/;
+  /\b(?:GENYX_N8N_TEST_TOKEN|GENYX_ADMIN_TOKEN|DATABASE_URL|SUPABASE_SERVICE_ROLE_KEY|SUPABASE_SECRET_KEY|NEXT_PUBLIC_[A-Z0-9_]*(?:TOKEN|SECRET|PASSWORD|PRIVATE_KEY))\b/;
 
 export function inspectPublicSource(path, content) {
   if (!sourceFile.test(path) || privatePath.test(path)) return [];
@@ -53,7 +53,7 @@ export function inspectPublicSource(path, content) {
     if (privatePath.test(target + "/") || /^(?:node:)?sqlite$/.test(value)) {
       errors.push("Private CRM or SQLite imported into public source");
     }
-    if (/^(?:scripts|automation)\//.test(target)) {
+    if (/^(?:scripts|automation|supabase)\//.test(target)) {
       errors.push("Operator or automation module imported into public source");
     }
   }
