@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     locale,
     locale === "es" ? "Productos SaaS" : "SaaS products",
     locale === "es"
-        ? "Consulta los productos con disponibilidad comercial confirmada."
-        : "Browse products with confirmed commercial availability.",
+      ? "Consulta los productos con disponibilidad comercial confirmada."
+      : "Browse products with confirmed commercial availability.",
   );
 }
 

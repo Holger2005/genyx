@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     locale,
     locale === "es" ? "Servicios especializados" : "Specialized services",
     locale === "es"
-        ? "Soluciones a medida. El alcance se define para cada proyecto."
-        : "Custom solutions. Scope is defined for each project.",
+      ? "Soluciones a medida. El alcance se define para cada proyecto."
+      : "Custom solutions. Scope is defined for each project.",
   );
 }
 

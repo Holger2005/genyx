@@ -24,8 +24,9 @@ function metadata(html) {
 }
 
 export function inspectStaticPage(html, locale, assetSize) {
-  const meta = metadata(html);
-  const title = html.match(/<title>([^<]+)<\/title>/i)?.[1];
+  const head = html.match(/<head>([\s\S]*?)<\/head>/i)?.[1] ?? "";
+  const meta = metadata(head);
+  const title = head.match(/<title>([^<]+)<\/title>/i)?.[1];
   assert.ok(title?.trim(), "Missing document title");
   for (const key of [
     "description",
@@ -50,7 +51,7 @@ export function inspectStaticPage(html, locale, assetSize) {
 
   const sizes = { html: Buffer.byteLength(html), javascript: 0, css: 0 };
   const assets = new Set(
-    [...html.matchAll(/(?:src|href)="\/(\_next\/static\/[^"?#]+\.(?:js|css))(?:\?[^"]*)?"/g)].map(
+    [...html.matchAll(/(?:src|href)="\/(_next\/static\/[^"?#]+\.(?:js|css))(?:\?[^"]*)?"/g)].map(
       (match) => match[1],
     ),
   );

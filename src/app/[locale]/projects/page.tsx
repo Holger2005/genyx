@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     locale,
     locale === "es" ? "Proyectos seleccionados" : "Selected projects",
     locale === "es"
-        ? "Casos de estudio propios y demostraciones técnicas verificables."
-        : "First-party case studies and verifiable technical demonstrations.",
+      ? "Casos de estudio propios y demostraciones técnicas verificables."
+      : "First-party case studies and verifiable technical demonstrations.",
   );
 }
 

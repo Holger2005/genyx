@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     locale,
     locale === "es" ? "Preparar proyecto" : "Prepare your project",
     locale === "es"
-        ? "Organiza los requisitos de tu proyecto antes de una consulta."
-        : "Organize your project requirements before a consultation.",
+      ? "Organiza los requisitos de tu proyecto antes de una consulta."
+      : "Organize your project requirements before a consultation.",
   );
 }
 
