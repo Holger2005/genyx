@@ -1,6 +1,6 @@
-# GENYX · v0.4.0
+# GENYX · v1.0.0-rc.1
 
-Bilingual Genyx corporate platform — Sprint 3 commercial integration laboratory.
+Bilingual Genyx corporate platform — Sprint 4 launch candidate.
 Includes the portfolio, project questionnaire, consultation page, optional Calendar and WhatsApp
 links, and local synthetic n8n/CRM tooling. No production deployment or real intake is enabled.
 All rights reserved.
@@ -80,7 +80,44 @@ Use `npm run crm -- demo` to create a local synthetic opportunity. See
 ## Security and privacy laboratory
 
 See [commercial security gates](docs/commercial-security.md) for the local n8n-to-CRM bridge.
+Run `npm run security:check` and `npm run test:security` for the tracked-file security gate.
+See [security and privacy readiness](docs/security-privacy.md) for the launch checklist.
 Real customer intake remains disabled.
+
+## Production architecture
+
+See [deployment architecture](docs/production-architecture.md) for the proposed
+public static deployment, private administration boundary and hosting decisions.
+Run `npm run test:boundary` to test the source-level isolation guard.
+
+## Local administrative dashboard
+
+See [local admin setup](docs/admin.md) for the authenticated synthetic CRM dashboard.
+It is a separate loopback-only process, never a public Next.js route.
+
+## PostgreSQL foundation
+
+See [PostgreSQL setup](docs/postgres.md) for the synthetic-only migration and
+isolated Docker checks. See [n8n PostgreSQL bridge](docs/n8n-postgres.md) for a live
+synthetic integration test. The local dashboard still uses SQLite.
+
+## Static preview
+
+Run `npm run build:static` and `npm run preview:static` for the isolated public
+site candidate. Run `npm run test:static` after the static build for local HTTP
+checks and a SHA-256 artifact manifest. See [deployment setup](docs/deployment.md). Rebuild with
+`npm run build` before running the normal Next.js server.
+
+## SEO and performance
+
+See [SEO readiness](docs/seo.md) for preview metadata, static asset budgets
+and the remaining launch gates. Run `npm run test:seo` for regression tests.
+
+## Commercial readiness
+
+See [sales playbook](docs/sales-playbook.md) and the [proposal template](docs/sales-proposal-template.md).
+Run `npm run test:sales` for the internal estimate calculator checks. No customer
+records or approved prices belong in the public repository.
 
 ## Content management
 
@@ -93,4 +130,5 @@ See [architecture](docs/architecture.md), [Sprint 0](docs/sprint-0.md), and [sec
 See [Sprint 1](docs/sprint-1.md) and the [release checklist](docs/releases/v0.2.0.md).
 See [Sprint 2](docs/sprint-2.md) and the [v0.3.0 release checklist](docs/releases/v0.3.0.md).
 See [Sprint 3](docs/sprint-3.md) and the [v0.4.0 release checklist](docs/releases/v0.4.0.md).
-The prototype is not a production-ready commercial site.
+See [v1.0.0-rc.1 release gates](docs/releases/v1.0.0-rc.1.md).
+The candidate is not an approved commercial launch.

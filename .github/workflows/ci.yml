@@ -43,11 +43,30 @@ jobs:
       - name: Quality checks
         run: npm run check
 
+      - name: Secret policy regression tests
+        run: npm run test:security
+
+      - name: Commercial estimate regression tests
+        run: npm run test:sales
+
+      - name: Static SEO and asset budget regression tests
+        run: npm run test:seo
+
+      - name: Public deployment boundary tests
+        run: npm run test:boundary
+
+      - name: Local authenticated dashboard checks
+        run: npm run test:admin
+
       - name: Local CRM CLI smoke check
         run: npm run test:crm
 
       - name: n8n CRM bridge contract checks
         run: npm run test:bridge
+
+      - name: PostgreSQL CRM authorization and synthetic ingestion checks
+        if: ${{ matrix.node-version == 24 }}
+        run: npm run test:postgres
 
       - name: Browser and HTTP smoke checks
         if: ${{ matrix.node-version == 24 }}
@@ -82,6 +101,33 @@ jobs:
           path: .artifacts/lighthouse/
           include-hidden-files: true
           if-no-files-found: warn
+          retention-days: 7
+
+      - name: Static deployment artifact
+        if: ${{ matrix.node-version == 24 }}
+        run: npm run build:static
+
+      - name: Static release HTTP checks and manifest
+        if: ${{ matrix.node-version == 24 }}
+        run: npm run test:static
+
+      - name: Upload audited static preview
+        if: ${{ matrix.node-version == 24 }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genyx-static-preview
+          path: out/
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Upload static preview manifest
+        if: ${{ matrix.node-version == 24 }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: genyx-static-manifest
+          path: .artifacts/static-manifest.json
+          include-hidden-files: true
+          if-no-files-found: error
           retention-days: 7
 
       - name: Security audit

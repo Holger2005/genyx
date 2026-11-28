@@ -16,8 +16,12 @@ For local experimentation only, bind the service to loopback, not all interfaces
 
 ```powershell
 docker volume create genyx_n8n_data
-docker run --rm -it --name genyx-n8n -p 127.0.0.1:5678:5678 -e GENERIC_TIMEZONE=America/Guayaquil -e TZ=America/Guayaquil -v genyx_n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n:2.49.7
+docker run -d --name genyx-n8n --restart unless-stopped -p 127.0.0.1:5678:5678 -e GENERIC_TIMEZONE=America/Guayaquil -e TZ=America/Guayaquil -v genyx_n8n_data:/home/node/.n8n docker.n8n.io/n8nio/n8n:2.49.7
 ```
+
+To stop and restart an existing container, use `docker stop genyx-n8n` and
+`docker start genyx-n8n`. Do not delete the persistent volume. If the container
+was previously created with `--rm`, recreate it using the same volume.
 
 Create your local owner account at http://localhost:5678. Keep the service private.
 Review the n8n license for your intended use and update to a supported patched
