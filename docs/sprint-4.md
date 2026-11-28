@@ -57,6 +57,14 @@ checked in the export. All preview pages remain noindex. Canonical URLs,
 hreflang and sitemap publication require the approved domain and launch review.
 See [SEO readiness](seo.md). Existing Lighthouse budgets are unchanged.
 
+## 4.8 — Customer acquisition readiness
+
+A Spanish sales playbook defines proposed segments, four-week goals, permitted
+manual channels, consultation and proposal templates. An operator-only estimate
+CLI accepts explicit inputs and stores nothing. No messages are sent, no
+prospects are imported and no actual prices or revenue are claimed.
+See [sales playbook](sales-playbook.md).
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.
