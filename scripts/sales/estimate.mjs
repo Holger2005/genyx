@@ -29,7 +29,9 @@ export function estimateProject(input) {
 
 export function parseSalesArguments(args) {
   if (args.length !== 5 || !args.slice(1).every((value) => /^[0-9]+$/.test(value))) {
-    throw new Error("Use: sales:estimate -- service hours hourlyCents costsCents contingencyPercent");
+    throw new Error(
+      "Use: sales:estimate -- service hours hourlyCents costsCents contingencyPercent",
+    );
   }
   const [service, hours, hourlyCents, costsCents, contingencyPercent] = args;
   return estimateProject({
