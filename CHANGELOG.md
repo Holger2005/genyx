@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.0-rc.1 — Sprint 4 launch candidate
+
+- Private authenticated local dashboard and synthetic PostgreSQL migrations with RLS.
+- Verified n8n response integration, replay-safe ingestion and database history.
+- Tracked-file security gate, privacy readiness checklist and commercial playbook.
+- Optional static export, provider configuration, localized metadata and asset budgets.
+- Local static HTTP checks and artifact SHA-256 manifest; commercial publication remains gated.
+- No production Supabase connection, real intake, domain purchase or customer acquisition claims.
+
 ## 0.4.0 — Sprint 3 commercial integration laboratory (candidate)
 
 - Bilingual project preparation, consultation information and optional booking/contact links.
