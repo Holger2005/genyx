@@ -1,6 +1,6 @@
 export function contactLinks(html) {
-  const anchors = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>/gi)].map(
-    (match) => match[1].replaceAll("&amp;", "&"),
+  const anchors = [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>/gi)].map((match) =>
+    match[1].replaceAll("&amp;", "&"),
   );
   const calendar = anchors.filter((href) =>
     /^https:\/\/(?:calendar\.app\.google\/[a-zA-Z0-9_-]+|calendar\.google\.com\/(?:calendar\/)?appointments\/schedules\/[a-zA-Z0-9_-]+)\/?$/.test(
