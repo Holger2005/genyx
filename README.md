@@ -101,6 +101,12 @@ See [PostgreSQL setup](docs/postgres.md) for the synthetic-only migration and
 isolated Docker checks. See [n8n PostgreSQL bridge](docs/n8n-postgres.md) for a live
 synthetic integration test. The local dashboard still uses SQLite.
 
+## Static preview
+
+Run `npm run build:static` and `npm run preview:static` for the isolated public
+site candidate. See [deployment setup](docs/deployment.md). Rebuild with
+`npm run build` before running the normal Next.js server.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).
