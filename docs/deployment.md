@@ -47,3 +47,9 @@ References:
 - https://developers.cloudflare.com/pages/configuration/headers/
 - https://developers.cloudflare.com/pages/configuration/redirects/
 - https://developers.cloudflare.com/pages/configuration/serving-pages/
+
+## Hosted candidate
+
+See [hosted identity and contact setup](sprint-5-contact.md) for the existing
+Cloudflare Pages project and read-only hosted smoke check. No contact values
+are stored in Git.
