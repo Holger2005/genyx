@@ -2,7 +2,7 @@
 
 Bilingual Genyx corporate platform — Sprint 4 launch candidate.
 Includes the portfolio, project questionnaire, consultation page, optional Calendar and WhatsApp
-links, and local synthetic n8n/CRM tooling. No production deployment or real intake is enabled.
+links, and local synthetic n8n/CRM tooling. A read-only public preview is hosted on Cloudflare Pages. Real intake is not enabled.
 All rights reserved.
 
 ## Start locally (Windows / macOS / Linux)
@@ -118,6 +118,11 @@ and the remaining launch gates. Run `npm run test:seo` for regression tests.
 See [sales playbook](docs/sales-playbook.md) and the [proposal template](docs/sales-proposal-template.md).
 Run `npm run test:sales` for the internal estimate calculator checks. No customer
 records or approved prices belong in the public repository.
+
+## Hosted preview and commercial identity
+
+See [commercial identity](docs/commercial-identity.md). Run `npm run check:hosted`
+to verify the public preview and contact-link presence without following the links.
 
 ## Content management
 

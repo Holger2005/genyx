@@ -37,7 +37,9 @@ After CI passes and the owner approves the preview and provider terms:
 5. Retain the previous artifact and verify the rollback procedure.
 
 Do not remove noindex or enable actual intake until the launch gates are approved.
-No domain purchase, account creation or deployment is performed by this change.
+The owner has since created the Git-integrated Pages preview. See
+[commercial identity](commercial-identity.md) for the current configuration.
+No custom domain purchase or commercial launch is approved.
 Do not upload a failed or unverified build.
 
 References:
