@@ -50,6 +50,13 @@ configuration and a loopback preview. The empty product detail route is removed
 until actual products are approved. Normal Node builds remain supported.
 See [deployment setup](deployment.md). No hosting or DNS is configured yet.
 
+## 4.7 — SEO and performance readiness
+
+Localized social metadata, unique page titles and static asset budgets are
+checked in the export. All preview pages remain noindex. Canonical URLs,
+hreflang and sitemap publication require the approved domain and launch review.
+See [SEO readiness](seo.md). Existing Lighthouse budgets are unchanged.
+
 ## Remaining work
 
 - Build and validate the static deployment profile before any public deployment.
