@@ -12,8 +12,7 @@ export default function Entry() {
     <main>
       <h1>Genyx</h1>
       <p>Selecciona tu idioma / Choose your language.</p>
-      <Link href="/es">Español</Link>{" "}
-      <Link href="/en">English</Link>
+      <Link href="/es">Español</Link> <Link href="/en">English</Link>
     </main>
   );
 }

@@ -35,7 +35,8 @@ const nextConfig: NextConfig = {
             },
             {
               key: "Content-Security-Policy",
-              value: "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'",
+              value:
+                "object-src 'none'; base-uri 'self'; frame-ancestors 'none'; form-action 'self'",
             },
           ],
         },

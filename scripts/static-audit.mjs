@@ -39,7 +39,9 @@ export function auditStatic(root) {
         expected.has(relative) ||
         relative === "_not-found.html" ||
         ["_headers", "_redirects"].includes(relative) ||
-        /^_next\/static\/[A-Za-z0-9_./-]+\.(?:js|css|woff2?|ttf|otf|png|svg|webp|json)$/.test(relative) ||
+        /^_next\/static\/[A-Za-z0-9_./-]+\.(?:js|css|woff2?|ttf|otf|png|svg|webp|json)$/.test(
+          relative,
+        ) ||
         /^media\/genyx\/(?:architecture|graphics)-(?:es|en)\.svg$/.test(relative) ||
         (/\.txt$/.test(relative) &&
           /^(?:index\.txt|404\.txt|_not-found(?:[./])|(?:es|en)(?:[./])|__next\.)/.test(relative));
