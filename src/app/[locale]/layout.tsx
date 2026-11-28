@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { isLocale, locales } from "../../domain/locale";
 import { getSiteContent } from "../../application/site-content";
 import { staticContentRepository } from "../../infrastructure/content/static-content";
+import { previewMetadata } from "../../presentation/seo/preview-metadata";
 import "../globals.css";
 
 export async function generateMetadata({
@@ -15,9 +16,8 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
   const copy = getSiteContent(staticContentRepository, locale);
   return {
+    ...previewMetadata(locale, copy.title, copy.description),
     title: { default: `Genyx — ${copy.title}`, template: "%s | Genyx" },
-    description: copy.description,
-    robots: { index: false, follow: false },
   };
 }
 

@@ -1,6 +1,6 @@
 # Security policy
 
-Genyx v0.4 is a commercial integration laboratory, not a production-ready service.
+Genyx v1.0.0-rc.1 is a launch candidate, not an approved production service.
 Do not disclose credentials, customer data or vulnerability details in public issues.
 Use GitHub private vulnerability reporting when enabled; otherwise contact the repository owner privately.
 Never commit secrets. Rotate compromised credentials immediately; deleting a file does not erase Git history.
@@ -12,6 +12,10 @@ Never commit secrets. Rotate compromised credentials immediately; deleting a fil
 - Review dependency changes and coordinate major migrations; do not use forced npm resolutions.
 - Keep GitHub Actions pinned to reviewed full commit SHAs and evaluate updates through pull requests.
 - Use least-privilege workflow permissions, no persisted checkout credentials and no secrets in untrusted PR workflows.
+
+The tracked-file security gate checks selected secret formats and prohibited artifact paths.
+It is not a full history scan or a substitute for platform secret scanning.
+See [security and privacy readiness](docs/security-privacy.md).
 
 ## Before production
 

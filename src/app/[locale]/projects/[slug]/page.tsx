@@ -6,6 +6,7 @@ import { staticProjectRepository } from "../../../../infrastructure/portfolio/st
 import { GenyxDemo } from "../../../../presentation/portfolio/genyx-demo";
 import { ProjectGallery } from "../../../../presentation/portfolio/project-gallery";
 import { PortfolioShell } from "../../../../presentation/portfolio/portfolio-shell";
+import { previewMetadata } from "../../../../presentation/seo/preview-metadata";
 
 export const dynamicParams = false;
 
@@ -25,7 +26,7 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
   const item = getProjectDetail(staticProjectRepository, locale, slug);
   if (!item) notFound();
-  return { title: item.title, description: item.summary };
+  return previewMetadata(locale, item.title, item.summary);
 }
 
 export default async function ProjectPage({

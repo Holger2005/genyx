@@ -18,3 +18,12 @@ next-env.d.ts
 *.sqlite-shm
 *.sqlite-wal
 *.sqlite-journal
+*.sqlite3
+*.db
+*.dump
+*.bak
+*.pfx
+backups/
+.n8n/
+supabase/.temp/
+supabase/.branches/

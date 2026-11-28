@@ -15,7 +15,7 @@ flowchart TD
   Infrastructure --> Domain
 ```
 
-The static content adapter can be replaced by Sanity after defining an async port.
-No database or external APIs are necessary yet. CSS and system fonts avoid extra network requests.
-The 3D engine, animations, CMS, n8n and booking belong to later sprints.
+The public site uses the validated static content adapter. CSS and system fonts avoid extra
+network requests. The CRM and n8n laboratory run as local operator tools, not public routes.
+See [production architecture](production-architecture.md) for the proposed deployment boundaries.
 The architecture check is a baseline literal-import scan, not a formal dependency graph.

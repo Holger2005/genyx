@@ -7,18 +7,18 @@ import { staticCatalog } from "../../../infrastructure/catalog/static-catalog";
 import { InquiryForm } from "../../../presentation/inquiry/inquiry-form";
 import { WhatsAppAction } from "../../../presentation/contact/whatsapp-action";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
+import { previewMetadata } from "../../../presentation/seo/preview-metadata";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return {
-    title: locale === "es" ? "Preparar proyecto | Genyx" : "Prepare your project | Genyx",
-    description:
-      locale === "es"
-        ? "Organiza los requisitos de tu proyecto antes de una consulta."
-        : "Organize your project requirements before a consultation.",
-    robots: { index: false, follow: false },
-  };
+  return previewMetadata(
+    locale,
+    locale === "es" ? "Preparar proyecto" : "Prepare your project",
+    locale === "es"
+      ? "Organiza los requisitos de tu proyecto antes de una consulta."
+      : "Organize your project requirements before a consultation.",
+  );
 }
 
 export default async function InquiryPage({ params }: { params: Promise<{ locale: string }> }) {

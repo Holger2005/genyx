@@ -1,1 +1,1 @@
-export const site = { name: "Genyx", defaultLocale: "es", version: "0.4.0" } as const;
+export const site = { name: "Genyx", defaultLocale: "es", version: "1.0.0-rc.1" } as const;
