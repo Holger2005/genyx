@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { isLocale } from "../../../domain/locale";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
+import { previewMetadata } from "../../../presentation/seo/preview-metadata";
 
 const copy = {
   es: {
@@ -52,7 +53,7 @@ const copy = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return { title: copy[locale].title, description: copy[locale].intro };
+  return previewMetadata(locale, copy[locale].title, copy[locale].intro);
 }
 
 export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {

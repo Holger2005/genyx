@@ -1,6 +1,7 @@
 import { lstatSync, readFileSync, readdirSync } from "node:fs";
 import { join, posix } from "node:path";
 import { inspectTrackedFile } from "./secret-policy.mjs";
+import { inspectStaticPage } from "./static-seo.mjs";
 
 const pages = [
   "",
@@ -23,6 +24,7 @@ expected.add("404.html");
 
 export function auditStatic(root) {
   const found = new Set();
+  const htmlPages = new Map();
   function walk(directory, prefix = "") {
     for (const entry of readdirSync(directory)) {
       const path = join(directory, entry);
@@ -62,6 +64,7 @@ export function auditStatic(root) {
         if (relative !== "index.html" && !text.includes(`lang="${relative.slice(0, 2)}"`)) {
           throw new Error("Incorrect page language: " + relative);
         }
+        if (relative !== "index.html") htmlPages.set(relative, text);
       }
       found.add(relative);
     }
@@ -73,6 +76,16 @@ export function auditStatic(root) {
   if (!readFileSync(join(root, "_headers"), "utf8").includes("X-Robots-Tag: noindex, nofollow")) {
     throw new Error("Preview must remain noindex");
   }
+  const titles = new Set();
+  for (const [path, html] of htmlPages) {
+    const { title, sizes } = inspectStaticPage(html, path.slice(0, 2), (asset) =>
+      found.has(asset) ? lstatSync(join(root, asset)).size : undefined,
+    );
+    if (titles.has(title)) throw new Error("Duplicate page title: " + path);
+    titles.add(title);
+    console.log(path, JSON.stringify(sizes));
+  }
+  console.log("GENYX static SEO and asset budgets passed");
   console.log("GENYX static deployment artifact checks passed");
   return found;
 }

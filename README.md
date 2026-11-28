@@ -107,6 +107,11 @@ Run `npm run build:static` and `npm run preview:static` for the isolated public
 site candidate. See [deployment setup](docs/deployment.md). Rebuild with
 `npm run build` before running the normal Next.js server.
 
+## SEO and performance
+
+See [SEO readiness](docs/seo.md) for preview metadata, static asset budgets
+and the remaining launch gates. Run `npm run test:seo` for regression tests.
+
 ## Content management
 
 Edit bilingual content through the [Git-based editorial workflow](docs/content-management.md).

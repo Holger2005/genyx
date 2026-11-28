@@ -4,6 +4,7 @@ import { getWhatsAppNumber } from "../../../../config/whatsapp";
 import { isLocale } from "../../../../domain/locale";
 import { staticCatalog } from "../../../../infrastructure/catalog/static-catalog";
 import { OfferingDetail } from "../../../../presentation/catalog/offering-detail";
+import { previewMetadata } from "../../../../presentation/seo/preview-metadata";
 
 export const dynamicParams = false;
 
@@ -21,7 +22,7 @@ export async function generateMetadata({
   if (!isLocale(locale)) notFound();
   const item = findOffering(getServices(staticCatalog, locale), slug);
   if (!item) notFound();
-  return { title: item.title, description: item.description };
+  return previewMetadata(locale, item.title, item.description);
 }
 
 export default async function DetailPage({

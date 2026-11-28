@@ -6,6 +6,7 @@ import { getWhatsAppNumber } from "../../../config/whatsapp";
 import { isLocale } from "../../../domain/locale";
 import { WhatsAppAction } from "../../../presentation/contact/whatsapp-action";
 import { PortfolioShell } from "../../../presentation/portfolio/portfolio-shell";
+import { previewMetadata } from "../../../presentation/seo/preview-metadata";
 
 const copy = {
   es: {
@@ -50,7 +51,7 @@ const copy = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
-  return { title: copy[locale].title, description: copy[locale].description };
+  return previewMetadata(locale, copy[locale].title, copy[locale].description);
 }
 
 export default async function ConsultationPage({
